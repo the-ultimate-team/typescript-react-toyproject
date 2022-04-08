@@ -32,12 +32,10 @@ const FontAwesomeSize = styled.div`
   list-style: none;
 `;
 
-const UlStyle = styled.ul``;
-
 const NavigationBarStyle = styled.nav`
   height: 76px;
-  background: lightcyan;
-  /* background: #faf9f9; */
+  /* background: lightcyan; */
+  background: #faf9f9;
   padding: 0 50px;
   display: flex;
   justify-content: space-between;

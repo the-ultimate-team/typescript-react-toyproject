@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import MainHomeImage from "../assets/mainHomeImage.svg";
+import MainHomeImage from "./assets/mainHomeImage.svg";
 
 const Home = () => {
   return (
