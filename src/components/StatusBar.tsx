@@ -7,7 +7,7 @@ const StatusBarStyle = styled.div`
 `;
 
 const StatusBar = () => {
-  return <StatusBarStyle>StatusBar</StatusBarStyle>;
+  return <StatusBarStyle></StatusBarStyle>;
 };
 
 export default StatusBar;

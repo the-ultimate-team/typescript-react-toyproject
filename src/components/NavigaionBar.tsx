@@ -29,16 +29,19 @@ const NavigaionBar = () => {
 
 const FontAwesomeSize = styled.div`
   font-size: 18px;
+  list-style: none;
 `;
+
+const UlStyle = styled.ul``;
 
 const NavigationBarStyle = styled.nav`
   height: 76px;
   background: lightcyan;
   /* background: #faf9f9; */
+  padding: 0 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 50px;
 `;
 
 export default NavigaionBar;
