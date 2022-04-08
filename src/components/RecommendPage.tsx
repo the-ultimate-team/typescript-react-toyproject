@@ -1,12 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import RecommendResultImg from "../assets/reommendResultImg.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHandPointUp,
-  faRotate,
-  faReceipt,
-} from "@fortawesome/free-solid-svg-icons";
+import FoodDibsImg from "../assets/foodDibsImg.svg";
+import FoodRecipeImg from "../assets/foodRecipeImg.svg";
+import FoodRefreshImg from "../assets/foodRefreshImg.svg";
 
 const RecommendPage = () => {
   return (
@@ -21,21 +18,21 @@ const RecommendPage = () => {
       <ThreeBtnSort>
         <BtnFontStyle>
           <BtnClickStyle>
-            <FontAwesomeIcon icon={faHandPointUp} />
+            <img src={FoodDibsImg} alt="찜하기 이미지" />
           </BtnClickStyle>
           <IconExplanationStyle>찜하기</IconExplanationStyle>
         </BtnFontStyle>
 
         <BtnFontStyle>
           <BtnClickStyle>
-            <FontAwesomeIcon icon={faRotate} />
+            <img src={FoodRefreshImg} alt="찜하기 이미지" />
           </BtnClickStyle>
           <IconExplanationStyle>재추천</IconExplanationStyle>
         </BtnFontStyle>
 
         <BtnFontStyle>
           <BtnClickStyle>
-            <FontAwesomeIcon icon={faReceipt} />
+            <img src={FoodRecipeImg} alt="찜하기 이미지" />
           </BtnClickStyle>
           <IconExplanationStyle>레시피</IconExplanationStyle>
         </BtnFontStyle>
@@ -68,12 +65,13 @@ const BtnFontStyle = styled.div`
 `;
 
 const ThreeBtnSort = styled.div`
-  width: 390px;
+  width: 266px;
   height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 47px 0 94px 0;
+  padding: 0 62px;
 `;
 
 const RecommendResultImgStyle = styled.div`

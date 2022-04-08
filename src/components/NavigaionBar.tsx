@@ -28,18 +28,22 @@ const NavigaionBar = () => {
 };
 
 const FontAwesomeSize = styled.div`
-  font-size: 18px;
-  list-style: none;
+  font-size: 22px;
+  color: #410f5a;
 `;
 
 const NavigationBarStyle = styled.nav`
+  width: 390px;
   height: 76px;
   /* background: lightcyan; */
-  background: #faf9f9;
+  background: #f3f0ff;
   padding: 0 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  bottom: 0;
+  box-sizing: border-box;
 `;
 
 export default NavigaionBar;
