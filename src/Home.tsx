@@ -21,7 +21,7 @@ const Home = () => {
 };
 
 const MainStartButtonStyle = styled.button`
-  background: #6e1e96;
+  background: #477d9e;
   width: 150px;
   height: 45px;
   font-size: 16px;

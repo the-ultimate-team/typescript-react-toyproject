@@ -29,14 +29,13 @@ const NavigaionBar = () => {
 
 const FontAwesomeSize = styled.div`
   font-size: 22px;
-  color: #410f5a;
+  color: #9dc9dd;
 `;
 
 const NavigationBarStyle = styled.nav`
   width: 390px;
   height: 76px;
-  /* background: lightcyan; */
-  background: #f3f0ff;
+  background: #fff;
   padding: 0 50px;
   display: flex;
   justify-content: space-between;

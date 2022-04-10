@@ -17,21 +17,21 @@ const RecommendPage = () => {
       </RecommendResultImgStyle>
       <ThreeBtnSort>
         <BtnFontStyle>
-          <BtnClickStyle>
+          <BtnClickStyle stroke={true}>
             <img src={FoodDibsImg} alt="찜하기 이미지" />
           </BtnClickStyle>
           <IconExplanationStyle>찜하기</IconExplanationStyle>
         </BtnFontStyle>
 
         <BtnFontStyle>
-          <BtnClickStyle>
+          <BtnClickStyle stroke={false}>
             <img src={FoodRefreshImg} alt="찜하기 이미지" />
           </BtnClickStyle>
           <IconExplanationStyle>재추천</IconExplanationStyle>
         </BtnFontStyle>
 
         <BtnFontStyle>
-          <BtnClickStyle>
+          <BtnClickStyle stroke={true}>
             <img src={FoodRecipeImg} alt="찜하기 이미지" />
           </BtnClickStyle>
           <IconExplanationStyle>레시피</IconExplanationStyle>
@@ -47,10 +47,11 @@ const IconExplanationStyle = styled.p`
   color: #343a40;
 `;
 
-const BtnClickStyle = styled.div`
+const BtnClickStyle = styled.div<{ stroke: boolean }>`
   width: 60px;
   height: 60px;
-  background: #795ece;
+  background: ${(props) => (props.stroke ? "#9dc9dd" : "#fff")};
+  border: ${(props) => (props.stroke ? "none" : "1px solid #9dc9dd")};
   border-radius: 30px;
   display: flex;
   justify-content: center;
