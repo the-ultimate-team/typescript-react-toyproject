@@ -33,7 +33,7 @@ const FontAwesomeSize = styled.div`
 `;
 
 const NavigationBarStyle = styled.nav`
-  width: 390px;
+  width: 100vw;
   height: 76px;
   background: #fff;
   padding: 0 50px;

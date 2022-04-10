@@ -1,25 +1,26 @@
 import React from "react";
-import StatusBar from "./components/StatusBar";
+// import StatusBar from "./components/StatusBar";
 import NavigaionBar from "./components/NavigaionBar";
-import "normalize.css/normalize.css";
 import Home from "./Home";
 import RecommendPage from "./components/RecommendPage";
 import styled from "styled-components";
+import Detail from "./components/Detail";
 
 function App() {
   return (
     <AppStyle>
-      <StatusBar />
+      {/* <StatusBar /> */}
       {/* <Home /> */}
-      <RecommendPage />
+      {/* <RecommendPage /> */}
+      <Detail />
       <NavigaionBar />
     </AppStyle>
   );
 }
 
 const AppStyle = styled.div`
-  width: 390px;
-  height: 844px;
+  width: 100vw;
+  height: 100vh;
   margin: 0 auto;
 `;
 

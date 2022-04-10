@@ -47,7 +47,7 @@ const MainTitleFontStyle = styled.div`
   font-size: 24px;
   color: #212529;
   font-weight: bold;
-  margin-top: 125px;
+  margin-top: 122px;
 `;
 
 const MainTagStyle = styled.main`
