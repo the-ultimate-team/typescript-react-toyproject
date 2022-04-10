@@ -17,7 +17,7 @@ const Dibs = () => {
         <DibsFoodCard />
 
         {/* <DibsFontSort>
-        <DibsFoodNone />
+        <DibsFoodNone text="찜목록이 비어있습니다." subText="찜하기로 추가하는 메뉴가 여기에 표시 됩니다."/>
       </DibsFontSort> */}
       </Wrapper>
       <CartFooterList>
@@ -58,6 +58,14 @@ const DibsFontStyle = styled.div`
   font-weight: 700;
   font-size: 24px;
   color: #6fa9cd;
+`;
+
+const DibsFontSort = styled.div`
+  height: calc(100vh - 204px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Wrapper = styled.div`

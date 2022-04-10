@@ -6,6 +6,7 @@ import RecommendPage from "./components/RecommendPage";
 import styled from "styled-components";
 import Detail from "./components/Detail";
 import Dibs from "./components/Dibs";
+import Cart from "./components/Cart";
 
 function App() {
   return (
@@ -14,7 +15,8 @@ function App() {
       {/* <Home /> */}
       {/* <RecommendPage /> */}
       {/* <Detail /> */}
-      <Dibs />
+      {/* <Dibs /> */}
+      <Cart />
       <NavigaionBar />
     </AppStyle>
   );

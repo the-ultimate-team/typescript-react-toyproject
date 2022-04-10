@@ -61,12 +61,4 @@ const DibsFoodCardStyle = styled.div`
   justify-content: space-between;
 `;
 
-const DibsFontSort = styled.div`
-  height: calc(100vh - 204px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
 export default DibsFoodCard;
