@@ -5,6 +5,7 @@ import Home from "./Home";
 import RecommendPage from "./components/RecommendPage";
 import styled from "styled-components";
 import Detail from "./components/Detail";
+import Dibs from "./components/Dibs";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       {/* <StatusBar /> */}
       {/* <Home /> */}
       {/* <RecommendPage /> */}
-      <Detail />
+      {/* <Detail /> */}
+      <Dibs />
       <NavigaionBar />
     </AppStyle>
   );
