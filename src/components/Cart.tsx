@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import DibsFoodNone from "./DibsFoodNone";
 import DibsCartMinusBtnImg from "../assets/dibsCartMinusBtnImg.svg";
+import CartCloseBtnImg from "../assets/cartCloseBtnImg.svg";
 
 const Cart = () => {
   return (
@@ -12,6 +13,18 @@ const Cart = () => {
           <FoodNameStyle>음식이름</FoodNameStyle>
           <img src={DibsCartMinusBtnImg} alt="장바구니 목록 삭제 버튼 이미지" />
         </FoodNameMinusStyle>
+        <FoodIngredientsPadding>
+          <FoodIngredientsSort>
+            <div>
+              <div></div>
+              <FoodIngredients>재료이름</FoodIngredients>
+            </div>
+            <div style={{ display: "flex" }}>
+              <FoodIngredientsGram>그램</FoodIngredientsGram>
+              <img src={CartCloseBtnImg} alt="음식 재료 닫기 버튼" />
+            </div>
+          </FoodIngredientsSort>
+        </FoodIngredientsPadding>
       </CartFoodCard>
       {/* <CenterSort>
         <DibsFoodNone
@@ -22,6 +35,30 @@ const Cart = () => {
     </CartWrapper>
   );
 };
+
+const FoodIngredientsGram = styled.div`
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #495057;
+  margin-right: 30px;
+`;
+
+const FoodIngredients = styled.div`
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #7e3249;
+`;
+
+const FoodIngredientsSort = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const FoodIngredientsPadding = styled.div`
+  padding: 17px 25px 26px 25px;
+`;
 
 const FoodNameStyle = styled.div`
   font-weight: 600;
