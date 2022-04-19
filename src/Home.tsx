@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import MainHomeImage from "./assets/mainHomeImage.svg";
 
@@ -14,7 +14,9 @@ const Home = () => {
         시작하기를 누르면 오늘의 추천 요리가 뜹니다.
       </MainMaualFontStyle>
       <div style={{ margin: "24px 0 96px 0" }}>
-        <MainStartButtonStyle>시작하기</MainStartButtonStyle>
+        <Link to="/recommend">
+          <MainStartButtonStyle>시작하기</MainStartButtonStyle>
+        </Link>
       </div>
     </MainTagStyle>
   );

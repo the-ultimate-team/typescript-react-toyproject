@@ -1,26 +1,29 @@
-import React from "react";
+// import React from "react";
+import * as React from "react";
 // import StatusBar from "./components/StatusBar";
 import NavigaionBar from "./components/NavigaionBar";
-import Home from "./Home";
-import RecommendPage from "./components/RecommendPage";
 import styled from "styled-components";
-import Detail from "./components/Detail";
-import Dibs from "./components/Dibs";
-import Cart from "./components/Cart";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { routePages } from "./routes/index";
 
-function App() {
+const App: React.FC = () => {
   return (
     <AppStyle>
-      {/* <StatusBar /> */}
-      {/* <Home /> */}
-      {/* <RecommendPage /> */}
-      {/* <Detail /> */}
-      {/* <Dibs /> */}
-      <Cart />
-      <NavigaionBar />
+      <BrowserRouter>
+        <Routes>
+          {routePages.map((route, i) => (
+            <Route
+              key={`routes__${i}`}
+              path={route.path}
+              element={route.element}
+            />
+          ))}
+        </Routes>
+        <NavigaionBar />
+      </BrowserRouter>
     </AppStyle>
   );
-}
+};
 
 const AppStyle = styled.div`
   width: 100vw;

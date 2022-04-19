@@ -23,7 +23,7 @@ const RecommendPage = () => {
           <IconExplanationStyle>찜하기</IconExplanationStyle>
         </BtnFontStyle>
 
-        <BtnFontStyle>
+        <BtnFontStyle style={{ margin: "0 43px" }}>
           <BtnClickStyle stroke={false}>
             <img src={FoodRefreshImg} alt="찜하기 이미지" />
           </BtnClickStyle>
@@ -66,13 +66,13 @@ const BtnFontStyle = styled.div`
 `;
 
 const ThreeBtnSort = styled.div`
-  width: 266px;
-  height: 50px;
+  /* width: 266px; */
+  /* height: 50px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 47px 0 94px 0;
-  padding: 0 62px;
+  /* padding: 0 62px; */
 `;
 
 const RecommendResultImgStyle = styled.div`

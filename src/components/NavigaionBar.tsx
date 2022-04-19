@@ -7,22 +7,34 @@ import {
   faCartShopping,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const NavigaionBar = () => {
   return (
     <NavigationBarStyle>
-      <FontAwesomeSize>
-        <FontAwesomeIcon icon={faHouse} />
-      </FontAwesomeSize>
-      <FontAwesomeSize>
-        <FontAwesomeIcon icon={faStar} />
-      </FontAwesomeSize>
-      <FontAwesomeSize>
-        <FontAwesomeIcon icon={faCartShopping} />
-      </FontAwesomeSize>
-      <FontAwesomeSize>
-        <FontAwesomeIcon icon={faBars} />
-      </FontAwesomeSize>
+      <Link to="/">
+        <FontAwesomeSize>
+          <FontAwesomeIcon icon={faHouse} />
+        </FontAwesomeSize>
+      </Link>
+
+      <Link to="/dibs">
+        <FontAwesomeSize>
+          <FontAwesomeIcon icon={faStar} />
+        </FontAwesomeSize>
+      </Link>
+
+      <Link to="/cart">
+        <FontAwesomeSize>
+          <FontAwesomeIcon icon={faCartShopping} />
+        </FontAwesomeSize>
+      </Link>
+
+      <Link to="/login">
+        <FontAwesomeSize>
+          <FontAwesomeIcon icon={faBars} />
+        </FontAwesomeSize>
+      </Link>
     </NavigationBarStyle>
   );
 };
