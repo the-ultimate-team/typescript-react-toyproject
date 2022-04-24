@@ -1,14 +1,50 @@
-import React from "react";
 import styled from "styled-components";
 import RecommendResultImg from "../assets/reommendResultImg.svg";
 import FoodDibsImg from "../assets/foodDibsImg.svg";
 import FoodRecipeImg from "../assets/foodRecipeImg.svg";
 import FoodRefreshImg from "../assets/foodRefreshImg.svg";
+import foodsData from "../foods.json";
+import { useState, useEffect } from "react";
+
+type Food = {
+  id: number;
+  foodName: string;
+  category: string;
+  dibs: boolean;
+  level: string;
+  time: string;
+  img: string;
+  recipe: string[];
+  ingredients: { name: string; gram: string }[];
+};
 
 const RecommendPage = () => {
+  const [recommendFood, setRecommendFood] = useState<Food>();
+
+  useEffect(() => {
+    setRecommendFood(getRecommendFood(getRandomId()));
+  }, []);
+
+  const getRandomId = (): number => {
+    return Math.floor(Math.random() * 6 + 1);
+  };
+
+  const getRecommendFood = (randomId: number): Food => {
+    return foodsData.foods.filter((food) => food.id === randomId)[0];
+  };
+
+  // 재추천 버튼 함수
+  const reRecommnedFoodHandler = () => {
+    setRecommendFood(getRecommendFood(getRandomId()));
+  };
+
+  console.log(recommendFood);
+
   return (
     <RecommendTagStyle>
-      <RecommendTitleFontStyle>추천 음식 이름</RecommendTitleFontStyle>
+      <RecommendTitleFontStyle>
+        {recommendFood?.foodName}
+      </RecommendTitleFontStyle>
       <RecommnedSubTitleFontStyle>
         이걸 해먹어 보는건 어때요?
       </RecommnedSubTitleFontStyle>
@@ -23,7 +59,10 @@ const RecommendPage = () => {
           <IconExplanationStyle>찜하기</IconExplanationStyle>
         </BtnFontStyle>
 
-        <BtnFontStyle style={{ margin: "0 43px" }}>
+        <BtnFontStyle
+          onClick={reRecommnedFoodHandler}
+          style={{ margin: "0 43px" }}
+        >
           <BtnClickStyle stroke={false}>
             <img src={FoodRefreshImg} alt="찜하기 이미지" />
           </BtnClickStyle>
