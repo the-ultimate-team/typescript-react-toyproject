@@ -7,7 +7,7 @@
       "dibs": false,
       "level": "만들기 쉬움",
       "time": "20~30min",
-      "img": "",
+      "img": "img/gimchijjigae.png",
       "recipe": [
         "돼지고기는 1.5cm 정도로 먹기 좋게 자른다.",
         "냄비에 돼지고기, 정수물, 새우젓을 넣고 강 불로 끓인다.",
@@ -64,7 +64,7 @@
       "dibs": false,
       "level": "중간",
       "time": "50~60min",
-      "img": "",
+      "img": "img/budaejjigae.jpg",
       "recipe": [
         "돼지고기는 1.5cm 정도로 먹기 좋게 자른다.",
         "냄비에 돼지고기, 정수물, 새우젓을 넣고 강 불로 끓인다.",
@@ -84,7 +84,7 @@
       "dibs": false,
       "level": "만들기 쉬움",
       "time": "40~50min",
-      "img": "",
+      "img": "img/jeyugbokkeum.jpg",
       "recipe": [
         "돼지고기 앞다리살 1근(600g), 진간장 2큰술, 설탕 2큰술을 잘 섞어 양념장을 만드는 동안 잠시 재워둔다.",
         "고춧가루 2큰술, 고추장 2큰술, 맛술 2큰술, 물엿(올리고당) 2큰술, 굴소스 1큰술, 다진 마늘 1큰술을 넣고 양념장을 만든다.",
@@ -148,7 +148,7 @@
       "dibs": false,
       "level": "만들기 어려움",
       "time": "40~50min",
-      "img": "",
+      "img": "img/nikujaga.jpg",
       "recipe": [
         "냄비에 기름을 두르고 고기를 익힌다.",
         "감자를 넣어서 센불로 볶아준다.",
@@ -210,7 +210,7 @@
       "dibs": false,
       "level": "만들기 어려움",
       "time": "60~70min",
-      "img": "",
+      "img": "img/paella.jpg",
       "recipe": [
         "양파와 파프리카를 잘게 다진다.",
         "후라이팬에 닭고기를 바싹 익혀준다.",
@@ -283,7 +283,7 @@
       "dibs": false,
       "level": "만들기 어려움",
       "time": "50~60min",
-      "img": "",
+      "img": "img/mapadubu.jpg",
       "recipe": [
         "두부는 사방 1.5cm 정도로 깍둑썰기하여 준비한다.",
         "쪽파, 대파는 송송 썰어 준비한다.",

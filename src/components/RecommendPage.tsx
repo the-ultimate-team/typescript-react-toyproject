@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import RecommendResultImg from "../assets/reommendResultImg.svg";
 import FoodDibsImg from "../assets/foodDibsImg.svg";
 import FoodRecipeImg from "../assets/foodRecipeImg.svg";
 import FoodRefreshImg from "../assets/foodRefreshImg.svg";
@@ -38,8 +37,6 @@ const RecommendPage = () => {
     setRecommendFood(getRecommendFood(getRandomId()));
   };
 
-  console.log(recommendFood);
-
   return (
     <RecommendTagStyle>
       <RecommendTitleFontStyle>
@@ -49,7 +46,11 @@ const RecommendPage = () => {
         이걸 해먹어 보는건 어때요?
       </RecommnedSubTitleFontStyle>
       <RecommendResultImgStyle>
-        <img src={RecommendResultImg} alt="추천 결과 음식 이미지" />
+        {/* <img src={recommendFood?.img} alt="추천 결과 음식 이미지" /> */}
+        <img
+          src={`${process.env.PUBLIC_URL}/${recommendFood?.img}`}
+          alt="추천 결과 음식 이미지"5
+        />
       </RecommendResultImgStyle>
       <ThreeBtnSort>
         <BtnFontStyle>
@@ -102,6 +103,7 @@ const BtnFontStyle = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 `;
 
 const ThreeBtnSort = styled.div`
@@ -115,8 +117,14 @@ const ThreeBtnSort = styled.div`
 `;
 
 const RecommendResultImgStyle = styled.div`
-  /* height: 292px; */
+  height: 340px;
+  width: 390px;
   margin-top: 34px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const RecommnedSubTitleFontStyle = styled.div`
