@@ -49,7 +49,7 @@ const RecommendPage = () => {
         {/* <img src={recommendFood?.img} alt="추천 결과 음식 이미지" /> */}
         <img
           src={`${process.env.PUBLIC_URL}/${recommendFood?.img}`}
-          alt="추천 결과 음식 이미지"5
+          alt="추천 결과 음식 이미지"
         />
       </RecommendResultImgStyle>
       <ThreeBtnSort>
