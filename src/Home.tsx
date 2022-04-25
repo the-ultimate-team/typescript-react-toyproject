@@ -31,6 +31,7 @@ const MainStartButtonStyle = styled.button`
   color: #ffffff;
   font-weight: bold;
   border-radius: 10px;
+  border: none;
   cursor: pointer;
 `;
 
