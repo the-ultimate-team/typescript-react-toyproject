@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
-const PasswordFrom = () => {
+interface Text {
+  text: string;
+}
+
+const PasswordFrom = ({ text }: Text) => {
   return (
     <>
-      <FontStyle>비밀번호</FontStyle>
+      <FontStyle>{text}</FontStyle>
       <InputStyle
         type="password"
         placeholder="영문/숫자 조합으로 8자 이상을 사용하세요."

@@ -16,13 +16,13 @@ const SignUp = () => {
         <IdForm />
       </div>
       <div style={{ marginTop: "14px" }}>
-        <PasswordFrom />
+        <PasswordFrom text="비밀번호" />
       </div>
       <div style={{ marginTop: "14px" }}>
-        <PasswordFrom />
+        <PasswordFrom text="비밀번호 확인" />
       </div>
       <div style={{ marginTop: "40px" }}>
-        <Btn text="회원가입" />
+        <Btn text="회원가입" btnColor={true} />
       </div>
       <LinkStyle to="/login">
         <LoginLinkStyle>로그인 하러가기</LoginLinkStyle>
