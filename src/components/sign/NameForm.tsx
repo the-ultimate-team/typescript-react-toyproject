@@ -4,7 +4,7 @@ const NameForm = () => {
   return (
     <>
       <FontStyle>이름</FontStyle>
-      <InputStyle type="text" placeholder="이메일을 입력해주세요." />
+      <InputStyle type="text" placeholder="이름을 입력해주세요." />
     </>
   );
 };

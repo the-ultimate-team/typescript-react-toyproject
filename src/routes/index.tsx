@@ -16,7 +16,7 @@ export const routePages = [
     element: <RecommendPage />,
   },
   {
-    path: "/detail",
+    path: "/detail/:foodId",
     element: <Detail />,
   },
   {

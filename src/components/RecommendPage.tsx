@@ -4,6 +4,7 @@ import FoodRecipeImg from "../assets/foodRecipeImg.svg";
 import FoodRefreshImg from "../assets/foodRefreshImg.svg";
 import foodsData from "../foods.json";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 type Food = {
   id: number;
@@ -19,6 +20,7 @@ type Food = {
 
 const RecommendPage = () => {
   const [recommendFood, setRecommendFood] = useState<Food>();
+  const [foodId, setFoodId] = useState<number>();
 
   useEffect(() => {
     setRecommendFood(getRecommendFood(getRandomId()));
@@ -29,6 +31,7 @@ const RecommendPage = () => {
   };
 
   const getRecommendFood = (randomId: number): Food => {
+    setFoodId(randomId);
     return foodsData.foods.filter((food) => food.id === randomId)[0];
   };
 
@@ -70,16 +73,22 @@ const RecommendPage = () => {
           <IconExplanationStyle>재추천</IconExplanationStyle>
         </BtnFontStyle>
 
-        <BtnFontStyle>
-          <BtnClickStyle stroke={true}>
-            <img src={FoodRecipeImg} alt="찜하기 이미지" />
-          </BtnClickStyle>
-          <IconExplanationStyle>레시피</IconExplanationStyle>
-        </BtnFontStyle>
+        <LinkStyle to={`/detail/${foodId}`}>
+          <BtnFontStyle>
+            <BtnClickStyle stroke={true}>
+              <img src={FoodRecipeImg} alt="찜하기 이미지" />
+            </BtnClickStyle>
+            <IconExplanationStyle>레시피</IconExplanationStyle>
+          </BtnFontStyle>
+        </LinkStyle>
       </ThreeBtnSort>
     </RecommendTagStyle>
   );
 };
+
+const LinkStyle = styled(Link)`
+  text-decoration: none;
+`;
 
 const IconExplanationStyle = styled.p`
   font-size: 12px;

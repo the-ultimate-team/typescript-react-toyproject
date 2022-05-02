@@ -1,20 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faHeart } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 import FoodLevelImg from "../assets/foodLevelImg.svg";
 import FoodTimeImg from "../assets/foodTimeImg.svg";
+import { useNavigate, useParams } from "react-router";
+import foodsData from "../foods.json";
+
+type Food = {
+  id: number;
+  foodName: string;
+  category: string;
+  dibs: boolean;
+  level: string;
+  time: string;
+  img: string;
+  recipe: string[];
+  ingredients: { name: string; gram: string }[];
+};
 
 const Detail = () => {
+  const { foodId } = useParams<{ foodId: string }>();
+  const [detailFood, setDetailFood] = useState<Food>();
+
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (foodId !== undefined)
+      // setDetailFood(foodsData.foods.filter((item) => item.id === +foodId)[0]);
+      setDetailFood(foodsData.foods[+foodId - 1]);
+  }, [foodId]);
+
   return (
-    <div style={{ background: "#477d9e" }}>
+    <div
+      style={{
+        background: "#477d9e",
+        height: "100vh",
+        width: "100vw",
+        overflow: "hidden",
+      }}
+    >
       <FoodTitleBackgroundStyle>
-        <FontAwesomeStyle>
+        <FontAwesomeStyle onClick={() => navigate(-1)}>
           <FontAwesomeIcon icon={faArrowLeft} />
         </FontAwesomeStyle>
         <FoodTitleCategory>
-          <FoodTitle>김치찌개</FoodTitle>
-          <FoodCategory>한식</FoodCategory>
+          <FoodTitle>{detailFood?.foodName}</FoodTitle>
+          <FoodCategory>{detailFood?.category}</FoodCategory>
         </FoodTitleCategory>
         <Sort>
           <SubContent>순서대로 차근차근 만들어보세요.</SubContent>
@@ -29,32 +61,34 @@ const Detail = () => {
             <div>
               <img src={FoodTimeImg} alt="음식 시간 이미지" />
             </div>
-            <FontTimeLevel>30~40min</FontTimeLevel>
+            <FontTimeLevel>{detailFood?.time}</FontTimeLevel>
           </FoodTimeLevel>
           <FoodTimeLevel stroke={true}>
             <div>
               <img src={FoodLevelImg} alt="음식 난이도 이미지" />
             </div>
-            <FontTimeLevel>만들기 쉬움</FontTimeLevel>
+            <FontTimeLevel>{detailFood?.level}</FontTimeLevel>
           </FoodTimeLevel>
         </FoodTimeLevelPadding>
         <FoodIngredientsStyle>
           <UlStyle>
-            <LiStyle>
-              <FoodIngredientsName>재료</FoodIngredientsName>
-              <FoodGram>그람</FoodGram>
-            </LiStyle>
+            {detailFood?.ingredients.map((item, index) => (
+              <LiStyle key={`ingredients__${index}`}>
+                <FoodIngredientsName>{item.name}</FoodIngredientsName>
+                <FoodGram>{item.gram}</FoodGram>
+              </LiStyle>
+            ))}
           </UlStyle>
         </FoodIngredientsStyle>
 
         <FoodRecipeIndexContent>
           <ul>
-            <FoodRecipeIndexContentLi>
-              <FoodRecipeIndexStyle>1</FoodRecipeIndexStyle>
-              <FoodRecipeContentStyle>
-                돼지고기는 1.5cm 정도로 먹기 좋게 자른다.
-              </FoodRecipeContentStyle>
-            </FoodRecipeIndexContentLi>
+            {detailFood?.recipe.map((item, index) => (
+              <FoodRecipeIndexContentLi key={`recipe__${index}`}>
+                <FoodRecipeIndexStyle>{index + 1}</FoodRecipeIndexStyle>
+                <FoodRecipeContentStyle>{item}</FoodRecipeContentStyle>
+              </FoodRecipeIndexContentLi>
+            ))}
           </ul>
         </FoodRecipeIndexContent>
       </FoodRecipe>
@@ -85,6 +119,10 @@ const FoodRecipeIndexContentLi = styled.li`
 const FoodRecipeIndexContent = styled.div`
   margin-top: 31px;
   padding-right: 37px;
+  overflow-y: scroll;
+  position: absolute;
+  top: 200px;
+  bottom: 0;
 `;
 
 const FoodGram = styled.div`
@@ -98,14 +136,12 @@ const FoodIngredientsName = styled.div`
   font-weight: 700;
   font-size: 16px;
   color: #7e3249;
+  min-width: 50px;
 `;
 
 const LiStyle = styled.li`
   text-align: center;
   padding-right: 45px;
-  &:last-child {
-    padding-right: 0;
-  }
 `;
 
 const UlStyle = styled.ul`
@@ -118,16 +154,19 @@ const FoodIngredientsStyle = styled.div`
   border-radius: 10px;
   margin-top: 31px;
   padding: 30px 0 30px 26px;
+  overflow-x: scroll;
+  overflow-y: hidden;
 `;
 
 const FontTimeLevel = styled.div`
   font-weight: 600;
   font-size: 16px;
   color: #6fa9cd;
+  margin-left: 5px;
 `;
 
 const FoodTimeLevel = styled.div<{ stroke: boolean }>`
-  width: 160px;
+  /* width: 160px; */
   height: 54px;
   background: ${(props) => (props.stroke ? "#E4F1F8" : "#fff")};
   border: ${(props) => (props.stroke ? "none" : "1px solid #6FA9CD")};
@@ -146,9 +185,11 @@ const FoodTimeLevelPadding = styled.div`
 `;
 
 const FoodRecipe = styled.div`
+  height: 100%;
   padding: 30px 0 4px 31px;
   background: #fff;
   border-radius: 30px 30px 0 0;
+  position: relative;
 `;
 
 const HeartStyle = styled.div`
@@ -204,6 +245,7 @@ const FoodTitleCategory = styled.div`
 const FontAwesomeStyle = styled.div`
   color: #fff;
   font-size: 20px;
+  cursor: pointer;
 `;
 
 const FoodTitleBackgroundStyle = styled.div`
