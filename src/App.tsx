@@ -1,6 +1,4 @@
-// import React from "react";
 import * as React from "react";
-// import StatusBar from "./components/StatusBar";
 import NavigaionBar from "./components/NavigaionBar";
 import styled from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
