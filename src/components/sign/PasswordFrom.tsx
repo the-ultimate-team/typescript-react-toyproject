@@ -1,14 +1,35 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-interface Text {
+interface PasswordType {
   text: string;
+  getPassword: Function;
 }
 
-const PasswordFrom = ({ text }: Text) => {
+const PasswordFrom = ({ text, getPassword }: PasswordType) => {
+  const [userPasswrod, setUserPasswrod] = useState("");
+
+  const onUserPassword = (e: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = e;
+    setUserPasswrod(value);
+  };
+
+  const onBlur = (e: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = e;
+    getPassword(value);
+  };
+
   return (
     <>
       <FontStyle>{text}</FontStyle>
       <InputStyle
+        value={userPasswrod}
+        onChange={onUserPassword}
+        onBlur={onBlur}
         type="password"
         placeholder="영문/숫자 조합으로 8자 이상을 사용하세요."
       />

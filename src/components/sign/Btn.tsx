@@ -4,10 +4,15 @@ import styled from "styled-components";
 interface Props {
   text: string;
   btnColor: boolean;
+  onClick: Function;
 }
 
-const Btn = ({ text, btnColor }: Props) => {
-  return <BtnStyle btnBackgroundColor={btnColor}>{text}</BtnStyle>;
+const Btn = ({ text, btnColor, onClick }: Props) => {
+  return (
+    <BtnStyle btnBackgroundColor={btnColor} onClick={() => onClick()}>
+      {text}
+    </BtnStyle>
+  );
 };
 
 const BtnStyle = styled.button<{ btnBackgroundColor: boolean }>`

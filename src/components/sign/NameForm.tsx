@@ -1,10 +1,37 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-const NameForm = () => {
+type NameValue = {
+  getUserName: Function;
+};
+
+const NameForm = ({ getUserName }: NameValue) => {
+  const [userName, setUserName] = useState("");
+
+  const onUserName = (e: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = e;
+    setUserName(value);
+  };
+
+  const onBlur = (e: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = e;
+    getUserName(value);
+  };
+
   return (
     <>
       <FontStyle>이름</FontStyle>
-      <InputStyle type="text" placeholder="이름을 입력해주세요." />
+      <InputStyle
+        value={userName}
+        onChange={onUserName}
+        onBlur={onBlur}
+        type="text"
+        placeholder="이름을 입력해주세요."
+      />
     </>
   );
 };

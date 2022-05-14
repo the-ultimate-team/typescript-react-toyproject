@@ -1,22 +1,73 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-const IdForm = () => {
+type IdValue = {
+  getId: Function;
+};
+
+const IdForm = ({ getId }: IdValue) => {
+  const [userId, setUserId] = useState("");
+  const [emailErrMsg, setEmailErrMsg] = useState("");
+  const [isEmail, setIsEmail] = useState(true);
+
+  const onUserId = (e: React.FormEvent<HTMLInputElement>) => {
+    const emailRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    const {
+      currentTarget: { value },
+    } = e;
+    const emailCurrent = value;
+    setUserId(value);
+
+    if (!emailRegex.test(emailCurrent)) {
+      setEmailErrMsg("이메일 형식이 틀렸습니다. 다시 입력해주세요.");
+      setIsEmail(false);
+    } else {
+      setIsEmail(true);
+    }
+  };
+
+  const onBlur = (e: React.FormEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = e;
+    getId(value);
+  };
+
   return (
     <>
       <FontStyle>아이디</FontStyle>
-      <InputStyle type="text" placeholder="이메일을 입력해주세요." />
+      <InputStyle
+        onChange={onUserId}
+        value={userId}
+        type="text"
+        placeholder="이메일을 입력해주세요."
+        emailState={isEmail}
+        onBlur={onBlur}
+      />
+      {isEmail ? null : <EmailErrorMsg>{emailErrMsg}</EmailErrorMsg>}
     </>
   );
 };
 
-const InputStyle = styled.input`
+const EmailErrorMsg = styled.div`
+  color: #ce2759;
+  font-size: 15px;
+  margin-top: 7px;
+`;
+
+const InputStyle = styled.input<{ emailState: boolean }>`
   width: 328px;
   height: 50px;
-  background: #ffffff;
-  border: 1px solid #6fa9cd;
+  background: #fff;
+  border: ${(props) =>
+    props.emailState ? "1px solid #6fa9cd" : "1px solid #ce2759"};
   border-radius: 10px;
   padding: 0 20px;
   margin-top: 7px;
+  :focus {
+    outline: none;
+  }
 `;
 
 const FontStyle = styled.div`
