@@ -24,7 +24,7 @@ const SignIn = () => {
         <PasswordFrom text="비밀번호" getPassword={getPassword} />
       </div>
       <div style={{ marginTop: "45px" }}>
-        <Btn text="로그인" btnColor={false} onClick={signInHandler} />
+        <Btn text="로그인" onClick={signInHandler} />
       </div>
       <LinkStyle to="/signup">
         <SignUpLinkStyle>회원가입 하러가기</SignUpLinkStyle>

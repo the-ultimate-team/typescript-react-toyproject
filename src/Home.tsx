@@ -6,7 +6,7 @@ import { User } from "./states";
 
 const Home = () => {
   const [userInfo, setUserInfo] = useRecoilState(User);
-  console.log(userInfo);
+  // console.log(userInfo);
   return (
     <MainTagStyle>
       <MainTitleFontStyle>오늘 뭐 먹지?</MainTitleFontStyle>

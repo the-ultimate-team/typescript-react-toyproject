@@ -3,11 +3,11 @@ import styled from "styled-components";
 import Btn from "./Btn";
 import IdForm from "./IdForm";
 import NameForm from "./NameForm";
-import PasswordFrom from "./PasswordFrom";
 import { useRecoilState } from "recoil";
 import { User } from "../../states";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import PasswordConfirmForm from "./PasswordConfirmForm";
 
 const SignUp = () => {
   const [userInfo, setUserInfo] = useRecoilState(User);
@@ -16,6 +16,23 @@ const SignUp = () => {
     id: "",
     password: "",
   });
+  // button 활성화 상태값
+  const [isCheckSignUp, setIsCheckSignUp] = useState(true);
+
+  const isEmptyValue = useCallback((signUpUserInfo) => {
+    let result: boolean = false;
+    for (let prop in signUpUserInfo) {
+      if (signUpUserInfo[prop] === "") return false;
+      else result = true;
+    }
+    return result;
+  }, []);
+
+  // 유효성 체크가 다 완료되면 버튼 활성화
+  useEffect(() => {
+    if (isEmptyValue(signUpUserInfo)) setIsCheckSignUp(false);
+  }, [signUpUserInfo, isEmptyValue]);
+
   const navigate = useNavigate();
 
   // Form에 있는 값 끌어올리기
@@ -31,16 +48,13 @@ const SignUp = () => {
     console.log(value);
     setSignUpUserInfo({ ...signUpUserInfo, password: value });
   };
-  const getPasswordConfirm = (value: string) => {
-    console.log(value);
-  };
+
   // recoil에 저장 후 이동
   const signUpRecoilHandler = () => {
     setUserInfo(signUpUserInfo);
     navigate("/");
   };
 
-  console.log(userInfo);
   return (
     <Wrapper>
       <SignUpStyle>회원가입</SignUpStyle>
@@ -51,13 +65,14 @@ const SignUp = () => {
         <IdForm getId={getId} />
       </div>
       <div style={{ marginTop: "14px" }}>
-        <PasswordFrom text="비밀번호" getPassword={getPassword} />
-      </div>
-      <div style={{ marginTop: "14px" }}>
-        <PasswordFrom text="비밀번호 확인" getPassword={getPasswordConfirm} />
+        <PasswordConfirmForm getPassword={getPassword} />
       </div>
       <div style={{ marginTop: "40px" }}>
-        <Btn text="회원가입" btnColor={true} onClick={signUpRecoilHandler} />
+        <Btn
+          text="회원가입"
+          onClick={signUpRecoilHandler}
+          disabled={isCheckSignUp}
+        />
       </div>
       <LinkStyle to="/login">
         <LoginLinkStyle>로그인 하러가기</LoginLinkStyle>

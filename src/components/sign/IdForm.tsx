@@ -19,19 +19,13 @@ const IdForm = ({ getId }: IdValue) => {
     const emailCurrent = value;
     setUserId(value);
 
-    if (!emailRegex.test(emailCurrent)) {
+    if (value !== "" && !emailRegex.test(emailCurrent)) {
       setEmailErrMsg("이메일 형식이 틀렸습니다. 다시 입력해주세요.");
       setIsEmail(false);
-    } else {
+    } else if (emailRegex.test(emailCurrent)) {
       setIsEmail(true);
+      getId(value);
     }
-  };
-
-  const onBlur = (e: React.FormEvent<HTMLInputElement>) => {
-    const {
-      currentTarget: { value },
-    } = e;
-    getId(value);
   };
 
   return (
@@ -43,7 +37,6 @@ const IdForm = ({ getId }: IdValue) => {
         type="text"
         placeholder="이메일을 입력해주세요."
         emailState={isEmail}
-        onBlur={onBlur}
       />
       {isEmail ? null : <EmailErrorMsg>{emailErrMsg}</EmailErrorMsg>}
     </>

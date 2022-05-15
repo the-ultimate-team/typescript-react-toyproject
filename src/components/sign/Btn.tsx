@@ -3,22 +3,22 @@ import styled from "styled-components";
 
 interface Props {
   text: string;
-  btnColor: boolean;
   onClick: Function;
+  disabled?: boolean;
 }
 
-const Btn = ({ text, btnColor, onClick }: Props) => {
+const Btn = ({ text, onClick, disabled }: Props) => {
   return (
-    <BtnStyle btnBackgroundColor={btnColor} onClick={() => onClick()}>
+    <BtnStyle onClick={() => onClick()} disabled={disabled}>
       {text}
     </BtnStyle>
   );
 };
 
-const BtnStyle = styled.button<{ btnBackgroundColor: boolean }>`
+const BtnStyle = styled.button`
   width: 328px;
   height: 50px;
-  background: ${(props) => (props.btnBackgroundColor ? "#477D9E" : "#adb5bd")};
+  background: #477d9e;
   border-radius: 10px;
   border: none;
   font-weight: 600;
@@ -28,6 +28,9 @@ const BtnStyle = styled.button<{ btnBackgroundColor: boolean }>`
   letter-spacing: -0.333333px;
   color: #ffffff;
   cursor: pointer;
+  :disabled {
+    background: #adb5bd;
+  }
 `;
 
 export default Btn;
