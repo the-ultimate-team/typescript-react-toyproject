@@ -5,6 +5,7 @@ import FoodRefreshImg from "../assets/foodRefreshImg.svg";
 import foodsData from "../foods.json";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import DibsModal from "./DibsModal";
 
 type Food = {
   id: number;
@@ -21,6 +22,7 @@ type Food = {
 const RecommendPage = () => {
   const [recommendFood, setRecommendFood] = useState<Food>();
   const [foodId, setFoodId] = useState<number>();
+  const [isDibsModal, setIsDibsModal] = useState<boolean>(false);
 
   useEffect(() => {
     setRecommendFood(getRecommendFood(getRandomId()));
@@ -40,49 +42,56 @@ const RecommendPage = () => {
     setRecommendFood(getRecommendFood(getRandomId()));
   };
 
+  const DibsModalHandler = () => {
+    setIsDibsModal((prev) => !prev);
+  };
+
   return (
-    <RecommendTagStyle>
-      <RecommendTitleFontStyle>
-        {recommendFood?.foodName}
-      </RecommendTitleFontStyle>
-      <RecommnedSubTitleFontStyle>
-        이걸 해먹어 보는건 어때요?
-      </RecommnedSubTitleFontStyle>
-      <RecommendResultImgStyle>
-        {/* <img src={recommendFood?.img} alt="추천 결과 음식 이미지" /> */}
-        <img
-          src={`${process.env.PUBLIC_URL}/${recommendFood?.img}`}
-          alt="추천 결과 음식 이미지"
-        />
-      </RecommendResultImgStyle>
-      <ThreeBtnSort>
-        <BtnFontStyle>
-          <BtnClickStyle stroke={true}>
-            <img src={FoodDibsImg} alt="찜하기 이미지" />
-          </BtnClickStyle>
-          <IconExplanationStyle>찜하기</IconExplanationStyle>
-        </BtnFontStyle>
-
-        <BtnFontStyle
-          onClick={reRecommnedFoodHandler}
-          style={{ margin: "0 43px" }}
-        >
-          <BtnClickStyle stroke={false}>
-            <img src={FoodRefreshImg} alt="찜하기 이미지" />
-          </BtnClickStyle>
-          <IconExplanationStyle>재추천</IconExplanationStyle>
-        </BtnFontStyle>
-
-        <LinkStyle to={`/detail/${foodId}`}>
-          <BtnFontStyle>
+    <>
+      {isDibsModal ? <DibsModal onClose={DibsModalHandler} /> : null}
+      <RecommendTagStyle>
+        <RecommendTitleFontStyle>
+          {recommendFood?.foodName}
+        </RecommendTitleFontStyle>
+        <RecommnedSubTitleFontStyle>
+          이걸 해먹어 보는건 어때요?
+        </RecommnedSubTitleFontStyle>
+        <RecommendResultImgStyle>
+          {/* <img src={recommendFood?.img} alt="추천 결과 음식 이미지" /> */}
+          <img
+            src={`${process.env.PUBLIC_URL}/${recommendFood?.img}`}
+            alt="추천 결과 음식 이미지"
+          />
+        </RecommendResultImgStyle>
+        <ThreeBtnSort>
+          <BtnFontStyle onClick={DibsModalHandler}>
             <BtnClickStyle stroke={true}>
-              <img src={FoodRecipeImg} alt="찜하기 이미지" />
+              <img src={FoodDibsImg} alt="찜하기 이미지" />
             </BtnClickStyle>
-            <IconExplanationStyle>레시피</IconExplanationStyle>
+            <IconExplanationStyle>찜하기</IconExplanationStyle>
           </BtnFontStyle>
-        </LinkStyle>
-      </ThreeBtnSort>
-    </RecommendTagStyle>
+
+          <BtnFontStyle
+            onClick={reRecommnedFoodHandler}
+            style={{ margin: "0 43px" }}
+          >
+            <BtnClickStyle stroke={false}>
+              <img src={FoodRefreshImg} alt="찜하기 이미지" />
+            </BtnClickStyle>
+            <IconExplanationStyle>재추천</IconExplanationStyle>
+          </BtnFontStyle>
+
+          <LinkStyle to={`/detail/${foodId}`}>
+            <BtnFontStyle>
+              <BtnClickStyle stroke={true}>
+                <img src={FoodRecipeImg} alt="찜하기 이미지" />
+              </BtnClickStyle>
+              <IconExplanationStyle>레시피</IconExplanationStyle>
+            </BtnFontStyle>
+          </LinkStyle>
+        </ThreeBtnSort>
+      </RecommendTagStyle>
+    </>
   );
 };
 
