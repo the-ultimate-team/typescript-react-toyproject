@@ -1,28 +1,39 @@
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import DibsCartPlusFooter from "./DibsCartPlusFooter";
 import DibsFoodCard from "./DibsFoodCard";
+import { DibsState } from "../states";
+import DibsFoodNone from "./DibsFoodNone";
 
 const FOOD_CATEGORY = ["전체", "한식", "일식", "중식", "양식"];
 
 const Dibs = () => {
+  const [dibsList, setDibsList] = useRecoilState<number[]>(DibsState);
+
   return (
     <div style={{ position: "relative", width: "100vw" }}>
       <Wrapper>
         <DibsFontStyle>찜목록</DibsFontStyle>
         <BtnSort>
-          {FOOD_CATEGORY.map((category) => (
-            <FoodCategoryBtn>{category}</FoodCategoryBtn>
+          {FOOD_CATEGORY.map((category, index) => (
+            <FoodCategoryBtn key={`category_${index}`}>
+              {category}
+            </FoodCategoryBtn>
           ))}
         </BtnSort>
-        <DibsFoodCard />
 
-        {/* <DibsFontSort>
-        <DibsFoodNone text="찜목록이 비어있습니다." subText="찜하기로 추가하는 메뉴가 여기에 표시 됩니다."/>
-      </DibsFontSort> */}
+        {dibsList.length === 0 ? (
+          <DibsFontSort>
+            <DibsFoodNone
+              text="찜목록이 비어있습니다."
+              subText="찜하기로 추가하는 메뉴가 여기에 표시 됩니다."
+            />
+          </DibsFontSort>
+        ) : (
+          <DibsFoodCard />
+        )}
       </Wrapper>
-      <CartFooterList>
-        <DibsCartPlusFooter />
-      </CartFooterList>
+      <CartFooterList>{/* <DibsCartPlusFooter /> */}</CartFooterList>
     </div>
   );
 };

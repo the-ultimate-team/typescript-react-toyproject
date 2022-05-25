@@ -6,6 +6,8 @@ import foodsData from "../foods.json";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import DibsModal from "./DibsModal";
+import { useRecoilState } from "recoil";
+import { DibsState } from "../states";
 
 type Food = {
   id: number;
@@ -21,8 +23,10 @@ type Food = {
 
 const RecommendPage = () => {
   const [recommendFood, setRecommendFood] = useState<Food>();
-  const [foodId, setFoodId] = useState<number>();
+  const [foodId, setFoodId] = useState<number>(0);
   const [isDibsModal, setIsDibsModal] = useState<boolean>(false);
+  const [dibsList, setDibsList] = useRecoilState(DibsState);
+  const [dibsMessage, setDibsMessage] = useState<string>("");
 
   useEffect(() => {
     setRecommendFood(getRecommendFood(getRandomId()));
@@ -46,9 +50,21 @@ const RecommendPage = () => {
     setIsDibsModal((prev) => !prev);
   };
 
+  const addDibsFoodList = () => {
+    if (!dibsList.includes(foodId)) {
+      setDibsList((dibsList) => [...dibsList, foodId]);
+      setDibsMessage("찜목록에 추가되었습니다!");
+    } else {
+      setDibsMessage("이미 찜목록에 있습니다.");
+    }
+    DibsModalHandler();
+  };
+
   return (
     <>
-      {isDibsModal ? <DibsModal onClose={DibsModalHandler} /> : null}
+      {isDibsModal ? (
+        <DibsModal onClose={DibsModalHandler} message={dibsMessage} />
+      ) : null}
       <RecommendTagStyle>
         <RecommendTitleFontStyle>
           {recommendFood?.foodName}
@@ -64,7 +80,7 @@ const RecommendPage = () => {
           />
         </RecommendResultImgStyle>
         <ThreeBtnSort>
-          <BtnFontStyle onClick={DibsModalHandler}>
+          <BtnFontStyle onClick={addDibsFoodList}>
             <BtnClickStyle stroke={true}>
               <img src={FoodDibsImg} alt="찜하기 이미지" />
             </BtnClickStyle>

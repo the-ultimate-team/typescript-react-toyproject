@@ -1,18 +1,49 @@
 import styled from "styled-components";
 import CartPlusImg from "../assets/cartPlusImg.svg";
+import { useRecoilState } from "recoil";
+import { DibsState } from "../states";
+import foodsData from "../foods.json";
+import { useEffect, useState } from "react";
+
+interface Food {
+  id: number;
+  foodName: string;
+  category: string;
+  dibs: boolean;
+  level: string;
+  time: string;
+  img: string;
+  recipe: string[];
+  ingredients: { name: string; gram: string }[];
+}
 
 const DibsFoodCard = () => {
+  const [dibsList, setDibsList] = useRecoilState<number[]>(DibsState);
+  const [foodInfoGet, setFoodInfoGet] = useState<Food[]>();
+
+  useEffect(() => {
+    setFoodInfoGet(
+      foodsData.foods.filter((food) => dibsList.includes(food.id))
+    );
+  }, []);
+
+  console.log(foodsData.foods.filter((food) => dibsList.includes(food.id)));
+
   return (
-    <DibsFoodCardStyle>
-      <FoodName>음식이름</FoodName>
-      <FlexAlignItem>
-        <CartDelSort>
-          <CartFontStyle>장보기</CartFontStyle>
-          <img src={CartPlusImg} alt="장보기 버튼 이미지" />
-        </CartDelSort>
-        <DibsFoodDel>삭제</DibsFoodDel>
-      </FlexAlignItem>
-    </DibsFoodCardStyle>
+    <>
+      {foodInfoGet?.map((food) => (
+        <DibsFoodCardStyle>
+          <FoodName>{food.foodName}</FoodName>
+          <FlexAlignItem>
+            <CartDelSort>
+              <CartFontStyle>장보기</CartFontStyle>
+              <img src={CartPlusImg} alt="장보기 버튼 이미지" />
+            </CartDelSort>
+            <DibsFoodDel>삭제</DibsFoodDel>
+          </FlexAlignItem>
+        </DibsFoodCardStyle>
+      ))}
+    </>
   );
 };
 

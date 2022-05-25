@@ -4,9 +4,10 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 interface Props {
   onClose: Function;
+  message: string;
 }
 
-const DibsModal = ({ onClose }: Props) => {
+const DibsModal = ({ onClose, message }: Props) => {
   const ModalCloseBtn = () => {
     onClose();
   };
@@ -15,7 +16,7 @@ const DibsModal = ({ onClose }: Props) => {
     <Container>
       <ModalBackground onClick={ModalCloseBtn}></ModalBackground>
       <Wrapper>
-        <DibsModalFontStyle>찜목록에 추가되었습니다!</DibsModalFontStyle>
+        <DibsModalFontStyle>{message}</DibsModalFontStyle>
         <DibsModalXmark onClick={ModalCloseBtn}>
           <FontAwesomeIcon icon={faXmark} />
         </DibsModalXmark>
