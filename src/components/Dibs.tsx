@@ -31,15 +31,17 @@ const Dibs = () => {
   // 찜목록 음식 카테고리 분류
   const [categoryFood, setCategoryFood] = useState<Food[]>([]);
 
-  // 처음 찜록록 들어갔을 시에 나오는 목록
+  // 찜록록에 있는 정보로 데이터 가져오기
   useEffect(() => {
     setDibsFoodList(
       foodsData.foods.filter((food) => dibsList.includes(food.id))
     );
-    setCategoryFood(
-      foodsData.foods.filter((food) => dibsList.includes(food.id))
-    );
   }, []);
+
+  // 처음 찜록록 들어갔을 시에 나오는 목록
+  useEffect(() => {
+    setCategoryFood(dibsFoodList);
+  }, [dibsFoodList]);
 
   const categorySelectHandler = (category: string) => {
     setCategorySelectTab(category);
@@ -66,7 +68,7 @@ const Dibs = () => {
           ))}
         </BtnSort>
 
-        {dibsList.length === 0 ? (
+        {categoryFood.length === 0 ? (
           <DibsFontSort>
             <DibsFoodNone
               text="찜목록이 비어있습니다."
