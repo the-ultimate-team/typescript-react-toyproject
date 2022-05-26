@@ -4,11 +4,51 @@ import DibsCartPlusFooter from "./DibsCartPlusFooter";
 import DibsFoodCard from "./DibsFoodCard";
 import { DibsState } from "../states";
 import DibsFoodNone from "./DibsFoodNone";
+import { useEffect, useState } from "react";
+import foodsData from "../foods.json";
 
 const FOOD_CATEGORY = ["전체", "한식", "일식", "중식", "양식"];
 
+interface Food {
+  id: number;
+  foodName: string;
+  category: string;
+  dibs: boolean;
+  level: string;
+  time: string;
+  img: string;
+  recipe: string[];
+  ingredients: { name: string; gram: string }[];
+}
+
 const Dibs = () => {
   const [dibsList, setDibsList] = useRecoilState<number[]>(DibsState);
+  const [categorySelectTab, setCategorySelectTab] = useState<string>("전체");
+
+  // 찜록록 전체 유지
+  const [dibsFoodList, setDibsFoodList] = useState<Food[]>([]);
+
+  // 찜목록 음식 카테고리 분류
+  const [categoryFood, setCategoryFood] = useState<Food[]>([]);
+
+  // 처음 찜록록 들어갔을 시에 나오는 목록
+  useEffect(() => {
+    setDibsFoodList(
+      foodsData.foods.filter((food) => dibsList.includes(food.id))
+    );
+    setCategoryFood(
+      foodsData.foods.filter((food) => dibsList.includes(food.id))
+    );
+  }, []);
+
+  const categorySelectHandler = (category: string) => {
+    setCategorySelectTab(category);
+    if (category === "전체") setCategoryFood(dibsFoodList);
+    else
+      setCategoryFood(
+        dibsFoodList.filter((food) => food.category === category)
+      );
+  };
 
   return (
     <div style={{ position: "relative", width: "100vw" }}>
@@ -16,7 +56,11 @@ const Dibs = () => {
         <DibsFontStyle>찜목록</DibsFontStyle>
         <BtnSort>
           {FOOD_CATEGORY.map((category, index) => (
-            <FoodCategoryBtn key={`category_${index}`}>
+            <FoodCategoryBtn
+              onClick={() => categorySelectHandler(category)}
+              selectTab={category === categorySelectTab}
+              key={`category_${index}`}
+            >
               {category}
             </FoodCategoryBtn>
           ))}
@@ -30,7 +74,7 @@ const Dibs = () => {
             />
           </DibsFontSort>
         ) : (
-          <DibsFoodCard />
+          <DibsFoodCard categoryFoodInfoProps={categoryFood} />
         )}
       </Wrapper>
       <CartFooterList>{/* <DibsCartPlusFooter /> */}</CartFooterList>
@@ -44,16 +88,17 @@ const CartFooterList = styled.div`
   bottom: 0;
 `;
 
-const FoodCategoryBtn = styled.button`
-  background: #fff;
+const FoodCategoryBtn = styled.button<{ selectTab: boolean }>`
+  background: ${(props) => (props.selectTab ? "#6fa9cd" : "#fff")};
   border: 1px solid #6fa9cd;
-  font-weight: 500;
+  font-weight: ${(props) => (props.selectTab ? 600 : 500)};
   font-size: 14px;
-  color: #6fa9cd;
+  color: ${(props) => (props.selectTab ? "#fff" : "#6fa9cd")};
   border-radius: 15px;
   width: 56px;
   height: 30px;
   margin-right: 7px;
+  cursor: pointer;
 
   &:last-child {
     margin-right: 0;
@@ -63,6 +108,7 @@ const FoodCategoryBtn = styled.button`
 const BtnSort = styled.div`
   display: flex;
   margin-top: 17px;
+  margin-bottom: 25px;
 `;
 
 const DibsFontStyle = styled.div`

@@ -1,9 +1,5 @@
 import styled from "styled-components";
 import CartPlusImg from "../assets/cartPlusImg.svg";
-import { useRecoilState } from "recoil";
-import { DibsState } from "../states";
-import foodsData from "../foods.json";
-import { useEffect, useState } from "react";
 
 interface Food {
   id: number;
@@ -17,21 +13,15 @@ interface Food {
   ingredients: { name: string; gram: string }[];
 }
 
-const DibsFoodCard = () => {
-  const [dibsList, setDibsList] = useRecoilState<number[]>(DibsState);
-  const [foodInfoGet, setFoodInfoGet] = useState<Food[]>();
+interface Props {
+  categoryFoodInfoProps: Food[];
+}
 
-  useEffect(() => {
-    setFoodInfoGet(
-      foodsData.foods.filter((food) => dibsList.includes(food.id))
-    );
-  }, []);
-
-  console.log(foodsData.foods.filter((food) => dibsList.includes(food.id)));
-
+const DibsFoodCard = ({ categoryFoodInfoProps }: Props) => {
+  console.log(categoryFoodInfoProps);
   return (
     <>
-      {foodInfoGet?.map((food) => (
+      {categoryFoodInfoProps?.map((food) => (
         <DibsFoodCardStyle>
           <FoodName>{food.foodName}</FoodName>
           <FlexAlignItem>
@@ -55,6 +45,7 @@ const FlexAlignItem = styled.div`
 const CartDelSort = styled.div`
   display: flex;
   margin-right: 20px;
+  cursor: pointer;
 `;
 
 const DibsFoodDel = styled.div`
@@ -62,6 +53,7 @@ const DibsFoodDel = styled.div`
   font-size: 16px;
   color: #495057;
   line-height: 19px;
+  cursor: pointer;
 `;
 
 const CartFontStyle = styled.div`
@@ -85,7 +77,7 @@ const DibsFoodCardStyle = styled.div`
   background: #ffffff;
   box-shadow: 0px 4px 29px 8px rgba(0, 0, 0, 0.03);
   border-radius: 10px;
-  margin-top: 25px;
+  margin-top: 11px;
   padding: 23px 20px;
   display: flex;
   align-items: center;
