@@ -16,11 +16,24 @@ interface Food {
 interface Props {
   categoryFoodInfoProps: Food[];
   foodIdUp: Function;
+  DibsDelModalUp: Function;
+  // foodCartIdUp: Function;
 }
 
-const DibsFoodCard = ({ categoryFoodInfoProps, foodIdUp }: Props) => {
-  const dibsFoodDelete = (id: number) => {
+const DibsFoodCard = ({
+  categoryFoodInfoProps,
+  foodIdUp,
+  DibsDelModalUp,
+}: Props) => {
+  // Dibs 컴포넌트로 삭제할 아이디 끌어올리기
+  const dibsFoodDelHandler = (id: number) => {
+    DibsDelModalUp(true);
     foodIdUp(id);
+  };
+
+  // 장보기 아이디 Dibs 컴포넌트로  끌어올리기
+  const foodCardHandler = (id: number) => {
+    // foodCartIdUp(id);
   };
 
   return (
@@ -33,7 +46,7 @@ const DibsFoodCard = ({ categoryFoodInfoProps, foodIdUp }: Props) => {
               <CartFontStyle>장보기</CartFontStyle>
               <img src={CartPlusImg} alt="장보기 버튼 이미지" />
             </CartDelSort>
-            <DibsFoodDel onClick={() => dibsFoodDelete(food.id)}>
+            <DibsFoodDel onClick={() => dibsFoodDelHandler(food.id)}>
               삭제
             </DibsFoodDel>
           </FlexAlignItem>

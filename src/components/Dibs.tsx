@@ -2,10 +2,11 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import DibsCartPlusFooter from "./DibsCartPlusFooter";
 import DibsFoodCard from "./DibsFoodCard";
-import { DibsState } from "../states";
+import { DibsState, CartFoodState } from "../states";
 import DibsFoodNone from "./DibsFoodNone";
 import { useEffect, useState } from "react";
 import foodsData from "../foods.json";
+import DelNoticeModal from "./DelNoticeModal";
 
 const FOOD_CATEGORY = ["전체", "한식", "일식", "중식", "양식"];
 
@@ -23,7 +24,13 @@ interface Food {
 
 const Dibs = () => {
   const [dibsList, setDibsList] = useRecoilState<number[]>(DibsState);
+  const [foodCartList, setFoodCartList] =
+    useRecoilState<number[]>(CartFoodState);
   const [categorySelectTab, setCategorySelectTab] = useState<string>("전체");
+  const [isDibsFoodDelModal, sestIsDibsFoodDelModal] = useState<boolean>(false);
+
+  // 삭제 시, 아이디 저장용
+  const [foodDeleteIdSave, setFoodDeleteIdSave] = useState<number>(0);
 
   // 찜록록으로 가져온 데이터 전체 유지
   const [dibsFoodList, setDibsFoodList] = useState<Food[]>([]);
@@ -52,43 +59,79 @@ const Dibs = () => {
       );
   };
 
-  const foodIdDel = (foodId: number) => {
-    setDibsList(dibsList.filter((id) => id !== foodId));
+  // 찜록록 삭제 아이디 저장
+  const foodIdDelIdSave = (foodId: number) => {
+    setFoodDeleteIdSave(foodId);
+    // setDibsList(dibsList.filter((id) => id !== foodId));
   };
 
-  return (
-    <div style={{ position: "relative", width: "100vw" }}>
-      <Wrapper>
-        <DibsFontStyle>찜목록</DibsFontStyle>
-        <BtnSort>
-          {FOOD_CATEGORY.map((category, index) => (
-            <FoodCategoryBtn
-              onClick={() => categorySelectHandler(category)}
-              selectTab={category === categorySelectTab}
-              key={`category_${index}`}
-            >
-              {category}
-            </FoodCategoryBtn>
-          ))}
-        </BtnSort>
+  // 찜록록 음식 삭제 시, 모달창 띄우기
+  const DibsDelModal = () => {
+    sestIsDibsFoodDelModal((prev) => !prev);
+  };
 
-        {/* 찜목록 카테고리에 없을 시 출력 */}
-        {categoryFood.length === 0 ? (
-          <DibsFontSort>
-            <DibsFoodNone
-              text="찜목록이 비어있습니다."
-              subText="찜하기로 추가하는 메뉴가 여기에 표시 됩니다."
+  // 삭제 시, 모달창 호출
+  const DelCloseModal = () => {
+    DibsDelModal();
+  };
+
+  // 찜록록 음식 리스트 삭제
+  const foodIdDel = () => {
+    setDibsList(dibsList.filter((id) => id !== foodDeleteIdSave));
+    DibsDelModal();
+  };
+
+  // 장바구니 추가 함수
+  // const foodCartAdd = (foodCartId: number) => {
+  //   if (!foodCartList.includes(foodCartId)) {
+  //     setDibsList((foodCartList) => [...foodCartList, foodCartId]);
+  //     setDibsMessage("찜목록에 추가되었습니다!");
+  //   } else {
+  //     setDibsMessage("이미 찜목록에 있습니다.");
+  //   }
+  //   DibsModalHandler();
+  // };
+
+  return (
+    <>
+      {isDibsFoodDelModal ? (
+        <DelNoticeModal foodIdDelUp={foodIdDel} onClose={DelCloseModal} />
+      ) : null}
+      <div style={{ position: "relative", width: "100vw" }}>
+        <Wrapper>
+          <DibsFontStyle>찜목록</DibsFontStyle>
+          <BtnSort>
+            {FOOD_CATEGORY.map((category, index) => (
+              <FoodCategoryBtn
+                onClick={() => categorySelectHandler(category)}
+                selectTab={category === categorySelectTab}
+                key={`category_${index}`}
+              >
+                {category}
+              </FoodCategoryBtn>
+            ))}
+          </BtnSort>
+
+          {/* 찜목록 카테고리에 없을 시 출력 */}
+          {categoryFood.length === 0 ? (
+            <DibsFontSort>
+              <DibsFoodNone
+                text="찜목록이 비어있습니다."
+                subText="찜하기로 추가하는 메뉴가 여기에 표시 됩니다."
+              />
+            </DibsFontSort>
+          ) : (
+            <DibsFoodCard
+              categoryFoodInfoProps={categoryFood}
+              foodIdUp={foodIdDelIdSave}
+              // foodCartIdUp={foodCartAdd}
+              DibsDelModalUp={DibsDelModal}
             />
-          </DibsFontSort>
-        ) : (
-          <DibsFoodCard
-            categoryFoodInfoProps={categoryFood}
-            foodIdUp={foodIdDel}
-          />
-        )}
-      </Wrapper>
-      <CartFooterList>{/* <DibsCartPlusFooter /> */}</CartFooterList>
-    </div>
+          )}
+        </Wrapper>
+        <CartFooterList>{/* <DibsCartPlusFooter /> */}</CartFooterList>
+      </div>
+    </>
   );
 };
 
