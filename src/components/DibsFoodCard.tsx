@@ -15,10 +15,14 @@ interface Food {
 
 interface Props {
   categoryFoodInfoProps: Food[];
+  foodIdUp: Function;
 }
 
-const DibsFoodCard = ({ categoryFoodInfoProps }: Props) => {
-  console.log(categoryFoodInfoProps);
+const DibsFoodCard = ({ categoryFoodInfoProps, foodIdUp }: Props) => {
+  const dibsFoodDelete = (id: number) => {
+    foodIdUp(id);
+  };
+
   return (
     <>
       {categoryFoodInfoProps?.map((food) => (
@@ -29,7 +33,9 @@ const DibsFoodCard = ({ categoryFoodInfoProps }: Props) => {
               <CartFontStyle>장보기</CartFontStyle>
               <img src={CartPlusImg} alt="장보기 버튼 이미지" />
             </CartDelSort>
-            <DibsFoodDel>삭제</DibsFoodDel>
+            <DibsFoodDel onClick={() => dibsFoodDelete(food.id)}>
+              삭제
+            </DibsFoodDel>
           </FlexAlignItem>
         </DibsFoodCardStyle>
       ))}

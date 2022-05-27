@@ -25,18 +25,18 @@ const Dibs = () => {
   const [dibsList, setDibsList] = useRecoilState<number[]>(DibsState);
   const [categorySelectTab, setCategorySelectTab] = useState<string>("전체");
 
-  // 찜록록 전체 유지
+  // 찜록록으로 가져온 데이터 전체 유지
   const [dibsFoodList, setDibsFoodList] = useState<Food[]>([]);
 
   // 찜목록 음식 카테고리 분류
   const [categoryFood, setCategoryFood] = useState<Food[]>([]);
 
-  // 찜록록에 있는 정보로 데이터 가져오기
+  // 찜록록(dibsList)에 있는 정보로 데이터 가져오기
   useEffect(() => {
     setDibsFoodList(
       foodsData.foods.filter((food) => dibsList.includes(food.id))
     );
-  }, []);
+  }, [dibsList]);
 
   // 처음 찜록록 들어갔을 시에 나오는 목록
   useEffect(() => {
@@ -50,6 +50,10 @@ const Dibs = () => {
       setCategoryFood(
         dibsFoodList.filter((food) => food.category === category)
       );
+  };
+
+  const foodIdDel = (foodId: number) => {
+    setDibsList(dibsList.filter((id) => id !== foodId));
   };
 
   return (
@@ -68,6 +72,7 @@ const Dibs = () => {
           ))}
         </BtnSort>
 
+        {/* 찜목록 카테고리에 없을 시 출력 */}
         {categoryFood.length === 0 ? (
           <DibsFontSort>
             <DibsFoodNone
@@ -76,7 +81,10 @@ const Dibs = () => {
             />
           </DibsFontSort>
         ) : (
-          <DibsFoodCard categoryFoodInfoProps={categoryFood} />
+          <DibsFoodCard
+            categoryFoodInfoProps={categoryFood}
+            foodIdUp={foodIdDel}
+          />
         )}
       </Wrapper>
       <CartFooterList>{/* <DibsCartPlusFooter /> */}</CartFooterList>
