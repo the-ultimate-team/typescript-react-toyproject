@@ -3,29 +3,52 @@ import styled from "styled-components";
 import DibsFoodNone from "./DibsFoodNone";
 import DibsCartMinusBtnImg from "../assets/dibsCartMinusBtnImg.svg";
 import CartCloseBtnImg from "../assets/cartCloseBtnImg.svg";
+import { useRecoilState } from "recoil";
+import { CartFoodState } from "../states";
+
+interface Food {
+  id: number;
+  foodName: string;
+  category: string;
+  dibs: boolean;
+  level: string;
+  time: string;
+  img: string;
+  recipe: string[];
+  ingredients: { name: string; gram: string }[];
+}
 
 const Cart = () => {
+  const [foodCartList, setFoodCartList] = useRecoilState<Food[]>(CartFoodState);
+
   return (
     <CartWrapper>
       <CartListFontStyle>장보기 목록</CartListFontStyle>
-      <CartFoodCard>
-        <FoodNameMinusStyle>
-          <FoodNameStyle>음식이름</FoodNameStyle>
-          <img src={DibsCartMinusBtnImg} alt="장바구니 목록 삭제 버튼 이미지" />
-        </FoodNameMinusStyle>
-        <FoodIngredientsPadding>
-          <FoodIngredientsSort>
-            <div>
-              <div></div>
-              <FoodIngredients>재료이름</FoodIngredients>
-            </div>
-            <div style={{ display: "flex" }}>
-              <FoodIngredientsGram>그램</FoodIngredientsGram>
-              <img src={CartCloseBtnImg} alt="음식 재료 닫기 버튼" />
-            </div>
-          </FoodIngredientsSort>
-        </FoodIngredientsPadding>
-      </CartFoodCard>
+
+      {foodCartList.map((food) => (
+        <CartFoodCard>
+          <FoodNameMinusStyle>
+            <FoodNameStyle>{food.foodName}</FoodNameStyle>
+            <img
+              src={DibsCartMinusBtnImg}
+              alt="장바구니 목록 삭제 버튼 이미지"
+            />
+          </FoodNameMinusStyle>
+          <FoodIngredientsPadding>
+            <FoodIngredientsSort>
+              <div>
+                <div></div>
+                <FoodIngredients>재료이름</FoodIngredients>
+              </div>
+              <div style={{ display: "flex" }}>
+                <FoodIngredientsGram>그램</FoodIngredientsGram>
+                <img src={CartCloseBtnImg} alt="음식 재료 닫기 버튼" />
+              </div>
+            </FoodIngredientsSort>
+          </FoodIngredientsPadding>
+        </CartFoodCard>
+      ))}
+
       {/* <CenterSort>
         <DibsFoodNone
           text="장보기 목록이 비어있습니다."

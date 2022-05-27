@@ -24,10 +24,9 @@ interface Food {
 
 const Dibs = () => {
   const [dibsList, setDibsList] = useRecoilState<number[]>(DibsState);
-  const [foodCartList, setFoodCartList] =
-    useRecoilState<number[]>(CartFoodState);
+  const [foodCartList, setFoodCartList] = useRecoilState<Food[]>(CartFoodState);
   const [categorySelectTab, setCategorySelectTab] = useState<string>("전체");
-  const [isDibsFoodDelModal, sestIsDibsFoodDelModal] = useState<boolean>(false);
+  const [isDibsFoodDelModal, setIsDibsFoodDelModal] = useState<boolean>(false);
 
   // 삭제 시, 아이디 저장용
   const [foodDeleteIdSave, setFoodDeleteIdSave] = useState<number>(0);
@@ -67,10 +66,10 @@ const Dibs = () => {
 
   // 찜록록 음식 삭제 시, 모달창 띄우기
   const DibsDelModal = () => {
-    sestIsDibsFoodDelModal((prev) => !prev);
+    setIsDibsFoodDelModal((prev) => !prev);
   };
 
-  // 삭제 시, 모달창 호출
+  // 모달창 닫기 호출
   const DelCloseModal = () => {
     DibsDelModal();
   };
@@ -82,20 +81,20 @@ const Dibs = () => {
   };
 
   // 장바구니 추가 함수
-  // const foodCartAdd = (foodCartId: number) => {
-  //   if (!foodCartList.includes(foodCartId)) {
-  //     setDibsList((foodCartList) => [...foodCartList, foodCartId]);
-  //     setDibsMessage("찜목록에 추가되었습니다!");
-  //   } else {
-  //     setDibsMessage("이미 찜목록에 있습니다.");
-  //   }
-  //   DibsModalHandler();
-  // };
+  const foodCartAdd = (foodObj: Food) => {
+    if (!foodCartList.includes(foodObj)) {
+      setFoodCartList((foodCartList) => [...foodCartList, foodObj]);
+    }
+  };
 
   return (
     <>
       {isDibsFoodDelModal ? (
-        <DelNoticeModal foodIdDelUp={foodIdDel} onClose={DelCloseModal} />
+        <DelNoticeModal
+          text="찜록록"
+          foodIdDelUp={foodIdDel}
+          onClose={DelCloseModal}
+        />
       ) : null}
       <div style={{ position: "relative", width: "100vw" }}>
         <Wrapper>
@@ -124,12 +123,14 @@ const Dibs = () => {
             <DibsFoodCard
               categoryFoodInfoProps={categoryFood}
               foodIdUp={foodIdDelIdSave}
-              // foodCartIdUp={foodCartAdd}
+              foodCartIdUp={foodCartAdd}
               DibsDelModalUp={DibsDelModal}
             />
           )}
         </Wrapper>
-        <CartFooterList>{/* <DibsCartPlusFooter /> */}</CartFooterList>
+        <CartFooterList>
+          {foodCartList.length !== 0 ? <DibsCartPlusFooter /> : null}
+        </CartFooterList>
       </div>
     </>
   );

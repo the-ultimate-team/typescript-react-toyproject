@@ -4,9 +4,10 @@ import DelModalBtn from "./DelModalBtn";
 interface Props {
   onClose: Function;
   foodIdDelUp: Function;
+  text: string;
 }
 
-const DelNoticeModal = ({ onClose, foodIdDelUp }: Props) => {
+const DelNoticeModal = ({ onClose, foodIdDelUp, text }: Props) => {
   const ModalCloseBtn = () => {
     onClose();
   };
@@ -20,7 +21,7 @@ const DelNoticeModal = ({ onClose, foodIdDelUp }: Props) => {
       <ModalBackground></ModalBackground>
       <Wrapper>
         <DelConfirmMsgFontStyle>
-          찜록록에서 삭제하시겠습니까?
+          {text}에서 삭제하시겠습니까?
         </DelConfirmMsgFontStyle>
         <ModalBtnSort>
           <div style={{ marginRight: "8px" }}>
