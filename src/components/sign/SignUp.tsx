@@ -52,7 +52,7 @@ const SignUp = () => {
   // recoil에 저장 후 이동
   const signUpRecoilHandler = () => {
     setUserInfo(signUpUserInfo);
-    navigate("/");
+    navigate("/login");
   };
 
   return (

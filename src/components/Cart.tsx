@@ -1,10 +1,9 @@
-import React from "react";
 import styled from "styled-components";
 import DibsFoodNone from "./DibsFoodNone";
 import DibsCartMinusBtnImg from "../assets/dibsCartMinusBtnImg.svg";
-import CartCloseBtnImg from "../assets/cartCloseBtnImg.svg";
 import { useRecoilState } from "recoil";
 import { CartFoodState } from "../states";
+import CheckBox from "./CheckBox";
 
 interface Food {
   id: number;
@@ -21,6 +20,11 @@ interface Food {
 const Cart = () => {
   const [foodCartList, setFoodCartList] = useRecoilState<Food[]>(CartFoodState);
 
+  const cartFoodIdDel = (foodId: number) => {
+    setFoodCartList(foodCartList.filter((food) => food.id !== foodId));
+  };
+
+  const checkboxHandler = () => {};
   return (
     <CartWrapper>
       <CartListFontStyle>장보기 목록</CartListFontStyle>
@@ -30,31 +34,34 @@ const Cart = () => {
           <FoodNameMinusStyle>
             <FoodNameStyle>{food.foodName}</FoodNameStyle>
             <img
+              onClick={() => cartFoodIdDel(food.id)}
               src={DibsCartMinusBtnImg}
               alt="장바구니 목록 삭제 버튼 이미지"
             />
           </FoodNameMinusStyle>
           <FoodIngredientsPadding>
-            <FoodIngredientsSort>
-              <div>
-                <div></div>
-                <FoodIngredients>재료이름</FoodIngredients>
-              </div>
-              <div style={{ display: "flex" }}>
-                <FoodIngredientsGram>그램</FoodIngredientsGram>
-                <img src={CartCloseBtnImg} alt="음식 재료 닫기 버튼" />
-              </div>
-            </FoodIngredientsSort>
+            {food.ingredients.map((item, index) => (
+              <FoodIngredientsSort>
+                <CheckBoxWrap>
+                  <CheckBox id={item.name} checked={false} />
+                  <FoodIngredients>{item.name}</FoodIngredients>
+                </CheckBoxWrap>
+                <div style={{ display: "flex" }}>
+                  <FoodIngredientsGram>{item.gram}</FoodIngredientsGram>
+                </div>
+              </FoodIngredientsSort>
+            ))}
           </FoodIngredientsPadding>
         </CartFoodCard>
       ))}
-
-      {/* <CenterSort>
-        <DibsFoodNone
-          text="장보기 목록이 비어있습니다."
-          subText={`장바구니로 추가하는 메뉴의 재료 목록이 여기에 표시 됩니다.`}
-        />
-      </CenterSort> */}
+      {foodCartList.length === 0 ? (
+        <CenterSort>
+          <DibsFoodNone
+            text="장보기 목록이 비어있습니다."
+            subText={`장바구니로 추가하는 메뉴의 재료 목록이 여기에 표시 됩니다.`}
+          />
+        </CenterSort>
+      ) : null}
     </CartWrapper>
   );
 };
@@ -64,10 +71,13 @@ const FoodIngredientsGram = styled.div`
   font-size: 16px;
   line-height: 19px;
   color: #495057;
-  margin-right: 30px;
+`;
+const CheckBoxWrap = styled.div`
+  display: flex;
 `;
 
 const FoodIngredients = styled.div`
+  margin-left: 10px;
   font-weight: 700;
   font-size: 16px;
   line-height: 19px;
@@ -77,6 +87,11 @@ const FoodIngredients = styled.div`
 const FoodIngredientsSort = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const FoodIngredientsPadding = styled.div`

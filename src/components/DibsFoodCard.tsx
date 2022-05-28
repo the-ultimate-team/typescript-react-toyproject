@@ -1,3 +1,5 @@
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import CartPlusImg from "../assets/cartPlusImg.svg";
 
@@ -41,7 +43,9 @@ const DibsFoodCard = ({
     <>
       {categoryFoodInfoProps?.map((food) => (
         <DibsFoodCardStyle>
-          <FoodName>{food.foodName}</FoodName>
+          <LinkStyle to={`/detail/${food.id}`}>
+            <FoodName>{food.foodName}</FoodName>
+          </LinkStyle>
           <FlexAlignItem>
             <CartDelSort onClick={() => foodCardHandler(food)}>
               <CartFontStyle>장보기</CartFontStyle>
@@ -56,6 +60,10 @@ const DibsFoodCard = ({
     </>
   );
 };
+
+const LinkStyle = styled(Link)`
+  text-decoration: none;
+`;
 
 const FlexAlignItem = styled.div`
   display: flex;

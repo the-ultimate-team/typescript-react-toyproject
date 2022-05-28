@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faHeart } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
@@ -6,6 +6,9 @@ import FoodLevelImg from "../assets/foodLevelImg.svg";
 import FoodTimeImg from "../assets/foodTimeImg.svg";
 import { useNavigate, useParams } from "react-router";
 import foodsData from "../foods.json";
+import { useRecoilState } from "recoil";
+import { DibsState } from "../states";
+import DibsHeart from "../assets/dibsHeart.svg";
 
 type Food = {
   id: number;
@@ -22,14 +25,24 @@ type Food = {
 const Detail = () => {
   const { foodId } = useParams<{ foodId: string }>();
   const [detailFood, setDetailFood] = useState<Food>();
+  const [dibsList, setDibsList] = useRecoilState<number[]>(DibsState);
 
   let navigate = useNavigate();
+
+  const { detailFoodId } = useParams();
+
+  console.log("dddfdfd" + detailFoodId);
 
   useEffect(() => {
     if (foodId !== undefined)
       // setDetailFood(foodsData.foods.filter((item) => item.id === +foodId)[0]);
       setDetailFood(foodsData.foods[+foodId - 1]);
   }, [foodId]);
+
+  const dibsFoodHeartMatch = () => {
+    // if(dibsList.includes(detailFoodId)) {
+    // }
+  };
 
   return (
     <div
