@@ -4,18 +4,7 @@ import DibsCartMinusBtnImg from "../assets/dibsCartMinusBtnImg.svg";
 import { useRecoilState } from "recoil";
 import { CartFoodState } from "../states";
 import CheckBox from "./CheckBox";
-
-interface Food {
-  id: number;
-  foodName: string;
-  category: string;
-  dibs: boolean;
-  level: string;
-  time: string;
-  img: string;
-  recipe: string[];
-  ingredients: { name: string; gram: string }[];
-}
+import { Food } from "../states";
 
 const Cart = () => {
   const [foodCartList, setFoodCartList] = useRecoilState<Food[]>(CartFoodState);
@@ -24,7 +13,22 @@ const Cart = () => {
     setFoodCartList(foodCartList.filter((food) => food.id !== foodId));
   };
 
-  const checkboxHandler = () => {};
+  const checkboxHandler = (foodId: number, ingredientName: string) => {
+    setFoodCartList(
+      foodCartList.map((food) =>
+        food.id === foodId
+          ? {
+              ...food,
+              ingredients: food.ingredients.map((ingredient) =>
+                ingredient.name === ingredientName
+                  ? { ...ingredient, checked: !ingredient.checked }
+                  : ingredient
+              ),
+            }
+          : food
+      )
+    );
+  };
   return (
     <CartWrapper>
       <CartListFontStyle>장보기 목록</CartListFontStyle>
@@ -41,9 +45,14 @@ const Cart = () => {
           </FoodNameMinusStyle>
           <FoodIngredientsPadding>
             {food.ingredients.map((item, index) => (
-              <FoodIngredientsSort>
+              <FoodIngredientsSort key={`ingredients__${index}`}>
                 <CheckBoxWrap>
-                  <CheckBox id={item.name} checked={false} />
+                  <CheckBox
+                    foodId={food.id}
+                    name={item.name}
+                    checked={item.checked}
+                    onClick={checkboxHandler}
+                  />
                   <FoodIngredients>{item.name}</FoodIngredients>
                 </CheckBoxWrap>
                 <div style={{ display: "flex" }}>
@@ -74,6 +83,7 @@ const FoodIngredientsGram = styled.div`
 `;
 const CheckBoxWrap = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const FoodIngredients = styled.div`

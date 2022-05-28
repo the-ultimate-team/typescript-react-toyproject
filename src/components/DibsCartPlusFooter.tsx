@@ -4,18 +4,7 @@ import DibsCartPlusCloseBtnImg from "../assets/dibsCartPlusCloseBtnImg.svg";
 import DibsCartMinusBtnImg from "../assets/dibsCartMinusBtnImg.svg";
 import { useRecoilState } from "recoil";
 import { CartFoodState } from "../states";
-
-interface Food {
-  id: number;
-  foodName: string;
-  category: string;
-  dibs: boolean;
-  level: string;
-  time: string;
-  img: string;
-  recipe: string[];
-  ingredients: { name: string; gram: string }[];
-}
+import { Food } from "../states";
 
 const DibsCartPlusFooter = () => {
   const [foodCartList, setFoodCartList] = useRecoilState<Food[]>(CartFoodState);

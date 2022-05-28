@@ -7,20 +7,9 @@ import DibsFoodNone from "./DibsFoodNone";
 import { useEffect, useState } from "react";
 import foodsData from "../foods.json";
 import DelNoticeModal from "./DelNoticeModal";
+import { Food } from "../states";
 
 const FOOD_CATEGORY = ["전체", "한식", "일식", "중식", "양식"];
-
-interface Food {
-  id: number;
-  foodName: string;
-  category: string;
-  dibs: boolean;
-  level: string;
-  time: string;
-  img: string;
-  recipe: string[];
-  ingredients: { name: string; gram: string }[];
-}
 
 const Dibs = () => {
   const [dibsList, setDibsList] = useRecoilState<number[]>(DibsState);

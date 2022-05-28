@@ -21,39 +21,48 @@
       "ingredients": [
         {
           "name": "앞다리",
-          "gram": "400g"
+          "gram": "400g",
+          "checked": false
         },
         {
           "name": "신김치",
-          "gram": "390g"
+          "gram": "390g",
+          "checked": false
         },
         {
           "name": "물",
-          "gram": "540ml"
+          "gram": "540ml",
+          "checked": false
         },
         {
           "name": "대파",
-          "gram": "70g"
+          "gram": "70g",
+          "checked": false
         },
         {
           "name": "간마늘",
-          "gram": "20g"
+          "gram": "20g",
+          "checked": false
         },
         {
           "name": "굵은 고춧가루",
-          "gram": "8g"
+          "gram": "8g",
+          "checked": false
         },
         {
           "name": "고운 고춧가루",
-          "gram": "3g"
+          "gram": "3g",
+          "checked": false
         },
         {
           "name": "국간장",
-          "gram": "10g"
+          "gram": "10g",
+          "checked": false
         },
         {
           "name": "새우젓",
-          "gram": "20g"
+          "gram": "20g",
+          "checked": false
         }
       ]
     },
@@ -78,23 +87,28 @@
       "ingredients": [
         {
           "name": "스팸",
-          "gram": "1캔"
+          "gram": "1캔",
+          "checked": false
         },
         {
           "name": "대파",
-          "gram": "1/2개"
+          "gram": "1/2개",
+          "checked": false
         },
         {
           "name": "양파",
-          "gram": "1/3개"
+          "gram": "1/3개",
+          "checked": false
         },
         {
           "name": "치즈",
-          "gram": "1장"
+          "gram": "1장",
+          "checked": false
         },
         {
           "name": "소세지",
-          "gram": "6개"
+          "gram": "6개",
+          "checked": false
         }
       ]
     },
@@ -118,47 +132,58 @@
       "ingredients": [
         {
           "name": "앞다리",
-          "gram": "600g"
+          "gram": "600g",
+          "checked": false
         },
         {
           "name": "양파",
-          "gram": "1/2개"
+          "gram": "1/2개",
+          "checked": false
         },
         {
           "name": "파",
-          "gram": "1/2개"
+          "gram": "1/2개",
+          "checked": false
         },
         {
           "name": "에리스리톨",
-          "gram": "2큰술"
+          "gram": "2큰술",
+          "checked": false
         },
         {
           "name": "아미노스",
-          "gram": "1큰술"
+          "gram": "1큰술",
+          "checked": false
         },
         {
           "name": "고춧가루",
-          "gram": "1/2큰술"
+          "gram": "1/2큰술",
+          "checked": false
         },
         {
           "name": "고추장",
-          "gram": "4큰술"
+          "gram": "4큰술",
+          "checked": false
         },
         {
           "name": "참기름",
-          "gram": "1큰술"
+          "gram": "1큰술",
+          "checked": false
         },
         {
           "name": "대장부",
-          "gram": "2큰술"
+          "gram": "2큰술",
+          "checked": false
         },
         {
           "name": "다진마늘",
-          "gram": "1/2큰술"
+          "gram": "1/2큰술",
+          "checked": false
         },
         {
           "name": "생강가루",
-          "gram": "1/8큰술"
+          "gram": "1/8큰술",
+          "checked": false
         }
       ]
     },
@@ -184,39 +209,48 @@
       "ingredients": [
         {
           "name": "소고기",
-          "gram": "100g"
+          "gram": "100g",
+          "checked": false
         },
         {
           "name": "감자",
-          "gram": "2개"
+          "gram": "2개",
+          "checked": false
         },
         {
           "name": "양파",
-          "gram": "1/2개"
+          "gram": "1/2개",
+          "checked": false
         },
         {
           "name": "물",
-          "gram": "500ml"
+          "gram": "500ml",
+          "checked": false
         },
         {
           "name": "가쓰오육수",
-          "gram": "3큰술"
+          "gram": "3큰술",
+          "checked": false
         },
         {
           "name": "미림",
-          "gram": "2큰술"
+          "gram": "2큰술",
+          "checked": false
         },
         {
           "name": "설탕",
-          "gram": "2큰술"
+          "gram": "2큰술",
+          "checked": false
         },
         {
           "name": "대장부",
-          "gram": "2큰술"
+          "gram": "2큰술",
+          "checked": false
         },
         {
           "name": "진간장",
-          "gram": "1큰술"
+          "gram": "1큰술",
+          "checked": false
         }
       ]
     },
@@ -245,51 +279,63 @@
       "ingredients": [
         {
           "name": "올리브유",
-          "gram": "20g"
+          "gram": "20g",
+          "checked": false
         },
         {
           "name": "닭다리살",
-          "gram": "200g"
+          "gram": "200g",
+          "checked": false
         },
         {
           "name": "마늘",
-          "gram": "1큰술"
+          "gram": "1큰술",
+          "checked": false
         },
         {
           "name": "양파",
-          "gram": "1/2개"
+          "gram": "1/2개",
+          "checked": false
         },
         {
           "name": "파프리카",
-          "gram": "1개"
+          "gram": "1개",
+          "checked": false
         },
         {
           "name": "오징어",
-          "gram": "1마리"
+          "gram": "1마리",
+          "checked": false
         },
         {
           "name": "토마토 페이스토",
-          "gram": "2큰술"
+          "gram": "2큰술",
+          "checked": false
         },
         {
           "name": "쌀",
-          "gram": "1컵"
+          "gram": "1컵",
+          "checked": false
         },
         {
           "name": "치킨스톡",
-          "gram": "500ml"
+          "gram": "500ml",
+          "checked": false
         },
         {
           "name": "샤프론",
-          "gram": "2개"
+          "gram": "2개",
+          "checked": false
         },
         {
           "name": "새우",
-          "gram": "6개"
+          "gram": "6개",
+          "checked": false
         },
         {
           "name": "레몬",
-          "gram": "1/2개"
+          "gram": "1/2개",
+          "checked": false
         }
       ]
     },
@@ -314,63 +360,78 @@
       "ingredients": [
         {
           "name": "고추장",
-          "gram": "230g"
+          "gram": "230g",
+          "checked": false
         },
         {
           "name": "황설탕",
-          "gram": "150g"
+          "gram": "150g",
+          "checked": false
         },
         {
           "name": "굵은 고춧가루",
-          "gram": "90g"
+          "gram": "90g",
+          "checked": false
         },
         {
           "name": "맛술",
-          "gram": "190g"
+          "gram": "190g",
+          "checked": false
         },
         {
           "name": "진간장",
-          "gram": "210g"
+          "gram": "210g",
+          "checked": false
         },
         {
           "name": "간마늘",
-          "gram": "200g "
+          "gram": "200g ",
+          "checked": false
         },
         {
           "name": "두부",
-          "gram": "180g"
+          "gram": "180g",
+          "checked": false
         },
         {
           "name": "간마늘",
-          "gram": "8g"
+          "gram": "8g",
+          "checked": false
         },
         {
           "name": "쪽파",
-          "gram": "5g"
+          "gram": "5g",
+          "checked": false
         },
         {
           "name": "대파",
-          "gram": "10g"
+          "gram": "10g",
+          "checked": false
         },
         {
           "name": "간 돼지고기",
-          "gram": "80g"
+          "gram": "80g",
+          "checked": false
         },
         {
           "name": "만능양념장",
-          "gram": "100g"
+          "gram": "100g",
+          "checked": false
         },
         {
           "name": "된장",
-          "gram": "15g"
+          "gram": "15g",
+          "checked": false
         },
         {
           "name": "식용유",
-          "gram": "15g"
+          "gram": "15g",
+          "checked": false
         },
         {
           "name": "참기름",
-          "gram": "7g"
+          "gram": "7g",
+          "checked": false
         }
       ]
     }

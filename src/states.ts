@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-interface Food {
+export interface Food {
   id: number;
   foodName: string;
   category: string;
@@ -9,7 +9,7 @@ interface Food {
   time: string;
   img: string;
   recipe: string[];
-  ingredients: { name: string; gram: string }[];
+  ingredients: { name: string; gram: string; checked: boolean }[];
 }
 
 export interface UserTypes {
