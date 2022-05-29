@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,8 +7,16 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { User } from "../states";
 
 const NavigaionBar = () => {
+  const [userInfo, setUserInfo] = useRecoilState(User);
+
+  const notLink = () => {
+    alert("로그인 이용 후, 사용하시길 바랍니다.");
+  };
+
   return (
     <NavigationBarStyle>
       <Link to="/">
@@ -18,17 +25,29 @@ const NavigaionBar = () => {
         </FontAwesomeSize>
       </Link>
 
-      <Link to="/dibs">
-        <FontAwesomeSize>
+      {userInfo.isLogin ? (
+        <Link to="/dibs">
+          <FontAwesomeSize>
+            <FontAwesomeIcon icon={faStar} />
+          </FontAwesomeSize>
+        </Link>
+      ) : (
+        <FontAwesomeSize onClick={notLink}>
           <FontAwesomeIcon icon={faStar} />
         </FontAwesomeSize>
-      </Link>
+      )}
 
-      <Link to="/cart">
-        <FontAwesomeSize>
+      {userInfo.isLogin ? (
+        <Link to="/cart">
+          <FontAwesomeSize>
+            <FontAwesomeIcon icon={faCartShopping} />
+          </FontAwesomeSize>
+        </Link>
+      ) : (
+        <FontAwesomeSize onClick={notLink}>
           <FontAwesomeIcon icon={faCartShopping} />
         </FontAwesomeSize>
-      </Link>
+      )}
 
       <Link to="/login">
         <FontAwesomeSize>

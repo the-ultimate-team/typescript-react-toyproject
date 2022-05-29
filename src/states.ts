@@ -16,6 +16,7 @@ export interface UserTypes {
   name: string;
   id: string;
   password: string;
+  isLogin: boolean;
 }
 
 export const User = atom<UserTypes>({
@@ -24,6 +25,7 @@ export const User = atom<UserTypes>({
     name: "",
     id: "",
     password: "",
+    isLogin: false,
   },
 });
 

@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 const SignIn = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useRecoilState(User);
+  const [loginFailBorder, setLoginFailBorder] = useState<boolean>(true);
 
   // 로그인 인풋값 가져와서 상태관리에 저장되어 있는거랑 비교하기위한 저장용
   const [userId, setUserId] = useState<string>("");
@@ -29,33 +30,35 @@ const SignIn = () => {
 
   const signInHandler = () => {
     if (userInfo.id !== userId || userInfo.password !== userPassword) {
-      isLoginFailToggle();
+      setIsLoginFail(false);
+      setLoginFailBorder(false);
       setLoginFailMessage("아이디 혹은 비밀번호가 일치하지 않습니다.");
       return;
     } else {
-      isLoginFailToggle();
+      setIsLoginFail(true);
+      setLoginFailBorder(true);
+      setUserInfo({ ...userInfo, isLogin: true });
       navigate("/");
     }
-  };
-
-  // 로그인 성공여부 토글용
-  const isLoginFailToggle = () => {
-    setIsLoginFail((prev) => !prev);
   };
 
   return (
     <Wrapper>
       <LoginFontStyle>로그인</LoginFontStyle>
       <div style={{ marginTop: "64px" }}>
-        <IdForm getId={getId} />
+        <IdForm isFailBorderProps={loginFailBorder} getId={getId} />
       </div>
       <div style={{ marginTop: "20px" }}>
-        <PasswordFrom text="비밀번호" getPassword={getPassword} />
+        <PasswordFrom
+          isFailBorderProps={loginFailBorder}
+          text="비밀번호"
+          getPassword={getPassword}
+        />
       </div>
-      {isLoginFail ? null : (
-        <LoginFailMessage>{loginFailMessage}</LoginFailMessage>
-      )}
-      <div style={{ marginTop: "45px" }}>
+      <div style={{ marginTop: "45px", position: "relative" }}>
+        {isLoginFail ? null : (
+          <LoginFailMessage>{loginFailMessage}</LoginFailMessage>
+        )}
         <Btn text="로그인" onClick={signInHandler} />
       </div>
       <LinkStyle to="/signup">
@@ -65,10 +68,17 @@ const SignIn = () => {
   );
 };
 
-const LoginFailMessage = styled.span`
-  color: red;
-  font-size: 15px;
-  margin-top: 20px;
+const LoginFailMessage = styled.div`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: -0.333333px;
+  color: #ce2759;
+  position: absolute;
+  top: -22px;
+  left: 42px;
 `;
 
 const LinkStyle = styled(Link)`
@@ -97,6 +107,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 export default SignIn;

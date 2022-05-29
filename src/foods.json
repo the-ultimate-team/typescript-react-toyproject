@@ -5,7 +5,7 @@
       "foodName": "김치찌개",
       "category": "한식",
       "dibs": false,
-      "level": "만들기 쉬움",
+      "level": "쉬움",
       "time": "20~30min",
       "img": "img/gimchijjigae.png",
       "recipe": [
@@ -71,7 +71,7 @@
       "foodName": "부대찌개",
       "category": "한식",
       "dibs": false,
-      "level": "중간",
+      "level": "보통",
       "time": "50~60min",
       "img": "img/budaejjigae.jpg",
       "recipe": [
@@ -117,7 +117,7 @@
       "foodName": "제육볶음",
       "category": "한식",
       "dibs": false,
-      "level": "만들기 쉬움",
+      "level": "쉬움",
       "time": "40~50min",
       "img": "img/jeyugbokkeum.jpg",
       "recipe": [
@@ -192,7 +192,7 @@
       "foodName": "니쿠자가",
       "category": "일식",
       "dibs": false,
-      "level": "만들기 어려움",
+      "level": "어려움",
       "time": "40~50min",
       "img": "img/nikujaga.jpg",
       "recipe": [
@@ -259,7 +259,7 @@
       "foodName": "빠에야",
       "category": "양식",
       "dibs": false,
-      "level": "만들기 어려움",
+      "level": "어려움",
       "time": "60~70min",
       "img": "img/paella.jpg",
       "recipe": [
@@ -344,7 +344,7 @@
       "foodName": "마파두부",
       "category": "중식",
       "dibs": false,
-      "level": "만들기 어려움",
+      "level": "어려움",
       "time": "50~60min",
       "img": "img/mapadubu.jpg",
       "recipe": [
@@ -391,11 +391,6 @@
         {
           "name": "두부",
           "gram": "180g",
-          "checked": false
-        },
-        {
-          "name": "간마늘",
-          "gram": "8g",
           "checked": false
         },
         {

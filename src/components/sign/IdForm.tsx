@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 type IdValue = {
   getId: Function;
+  isFailBorderProps: boolean;
 };
 
-const IdForm = ({ getId }: IdValue) => {
-  const [userId, setUserId] = useState("");
-  const [emailErrMsg, setEmailErrMsg] = useState("");
-  const [isEmail, setIsEmail] = useState(true);
+const IdForm = ({ getId, isFailBorderProps }: IdValue) => {
+  const [userId, setUserId] = useState<string>("");
+  const [emailErrMsg, setEmailErrMsg] = useState<string>("");
+  const [isEmail, setIsEmail] = useState<boolean>(true);
+  const [isEmailMsg, setIsEmailMsg] = useState<boolean>(true);
+
+  useEffect(() => {
+    setIsEmail(isFailBorderProps);
+  }, [isFailBorderProps]);
 
   const onUserId = (e: React.FormEvent<HTMLInputElement>) => {
     const emailRegex =
@@ -21,9 +27,9 @@ const IdForm = ({ getId }: IdValue) => {
 
     if (value !== "" && !emailRegex.test(emailCurrent)) {
       setEmailErrMsg("이메일 형식이 틀렸습니다. 다시 입력해주세요.");
-      setIsEmail(false);
+      setIsEmailMsg(false);
     } else if (emailRegex.test(emailCurrent)) {
-      setIsEmail(true);
+      setIsEmailMsg(true);
       getId(value);
     }
   };
@@ -38,7 +44,7 @@ const IdForm = ({ getId }: IdValue) => {
         placeholder="이메일을 입력해주세요."
         emailState={isEmail}
       />
-      {isEmail ? null : <EmailErrorMsg>{emailErrMsg}</EmailErrorMsg>}
+      {isEmailMsg ? null : <EmailErrorMsg>{emailErrMsg}</EmailErrorMsg>}
     </>
   );
 };

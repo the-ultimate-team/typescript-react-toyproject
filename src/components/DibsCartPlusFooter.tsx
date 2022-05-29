@@ -1,6 +1,4 @@
-import React from "react";
 import styled from "styled-components";
-import DibsCartPlusCloseBtnImg from "../assets/dibsCartPlusCloseBtnImg.svg";
 import DibsCartMinusBtnImg from "../assets/dibsCartMinusBtnImg.svg";
 import { useRecoilState } from "recoil";
 import { CartFoodState } from "../states";
@@ -18,12 +16,6 @@ const DibsCartPlusFooter = () => {
     <CartFooterWrapper>
       <CartCloseBtnSort>
         <CartFontStyle>장바구니</CartFontStyle>
-        <div>
-          <img
-            src={DibsCartPlusCloseBtnImg}
-            alt="찜 목록 장바구니 닫기 버튼 이미지"
-          />
-        </div>
       </CartCloseBtnSort>
       <CartListSort>
         {foodCartList.map((food, index) => (
@@ -43,6 +35,8 @@ const DibsCartPlusFooter = () => {
 
 const CartListSort = styled.div`
   display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
 `;
 
 const CartFoodName = styled.div`
@@ -50,14 +44,14 @@ const CartFoodName = styled.div`
   font-size: 14px;
   line-height: 30px;
   color: #7e3249;
-  margin-right: 15px;
+  margin-right: 8px;
 `;
 
 const CartFoodCard = styled.div`
   background: #ffefd1;
   border-radius: 5px;
   padding: 10px;
-  /* width: 103px; */
+  min-width: 103px;
   height: 38px;
   display: flex;
   justify-content: space-between;

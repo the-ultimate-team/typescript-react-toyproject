@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import DibsModal from "./DibsModal";
 import { useRecoilState } from "recoil";
-import { DibsState } from "../states";
+import { DibsState, User } from "../states";
 
 type Food = {
   id: number;
@@ -22,6 +22,7 @@ type Food = {
 };
 
 const RecommendPage = () => {
+  const [userInfo, setUserInfo] = useRecoilState(User);
   const [recommendFood, setRecommendFood] = useState<Food>();
   const [foodId, setFoodId] = useState<number>(0);
   const [isDibsModal, setIsDibsModal] = useState<boolean>(false);
@@ -60,6 +61,10 @@ const RecommendPage = () => {
     DibsModalHandler();
   };
 
+  const notDibs = () => {
+    alert("로그인 이용 후, 사용하실 바랍니다.");
+  };
+
   return (
     <>
       {isDibsModal ? (
@@ -80,12 +85,21 @@ const RecommendPage = () => {
           />
         </RecommendResultImgStyle>
         <ThreeBtnSort>
-          <BtnFontStyle onClick={addDibsFoodList}>
-            <BtnClickStyle stroke={true}>
-              <img src={FoodDibsImg} alt="찜하기 이미지" />
-            </BtnClickStyle>
-            <IconExplanationStyle>찜하기</IconExplanationStyle>
-          </BtnFontStyle>
+          {userInfo.isLogin ? (
+            <BtnFontStyle onClick={addDibsFoodList}>
+              <BtnClickStyle stroke={true}>
+                <img src={FoodDibsImg} alt="찜하기 이미지" />
+              </BtnClickStyle>
+              <IconExplanationStyle>찜하기</IconExplanationStyle>
+            </BtnFontStyle>
+          ) : (
+            <BtnFontStyle onClick={notDibs}>
+              <BtnClickStyle stroke={true}>
+                <img src={FoodDibsImg} alt="찜하기 이미지" />
+              </BtnClickStyle>
+              <IconExplanationStyle>찜하기</IconExplanationStyle>
+            </BtnFontStyle>
+          )}
 
           <BtnFontStyle
             onClick={reRecommnedFoodHandler}

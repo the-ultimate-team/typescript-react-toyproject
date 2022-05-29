@@ -149,8 +149,8 @@ const CartListFontStyle = styled.div`
 
 const CartWrapper = styled.div`
   background: #f1f3f5;
-  height: 100vh;
-  padding: 27px 30px 0 30px;
+  min-height: 100%;
+  padding: 27px 30px 86px 30px;
 `;
 
 export default Cart;

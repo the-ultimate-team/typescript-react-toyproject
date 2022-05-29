@@ -26,22 +26,28 @@ const Detail = () => {
   const { foodId } = useParams<{ foodId: string }>();
   const [detailFood, setDetailFood] = useState<Food>();
   const [dibsList, setDibsList] = useRecoilState<number[]>(DibsState);
+  const [isDibsHeart, setIsDibsHeart] = useState<boolean>(false);
 
-  let navigate = useNavigate();
+  let foodIdNumber: number = 0;
 
-  const { detailFoodId } = useParams();
-
-  console.log("dddfdfd" + detailFoodId);
+  const navigate = useNavigate();
+  if (foodId !== undefined) {
+    foodIdNumber = parseInt(foodId);
+  }
 
   useEffect(() => {
     if (foodId !== undefined)
       // setDetailFood(foodsData.foods.filter((item) => item.id === +foodId)[0]);
       setDetailFood(foodsData.foods[+foodId - 1]);
+    dibsFoodHeartMatch();
   }, [foodId]);
 
   const dibsFoodHeartMatch = () => {
-    // if(dibsList.includes(detailFoodId)) {
-    // }
+    if (dibsList.includes(foodIdNumber)) {
+      setIsDibsHeart(true);
+    } else {
+      setIsDibsHeart(false);
+    }
   };
 
   return (
@@ -63,7 +69,7 @@ const Detail = () => {
         </FoodTitleCategory>
         <Sort>
           <SubContent>순서대로 차근차근 만들어보세요.</SubContent>
-          <HeartStyle>
+          <HeartStyle isHeart={isDibsHeart}>
             <FontAwesomeIcon icon={faHeart} />
           </HeartStyle>
         </Sort>
@@ -77,10 +83,10 @@ const Detail = () => {
             <FontTimeLevel>{detailFood?.time}</FontTimeLevel>
           </FoodTimeLevel>
           <FoodTimeLevel stroke={true}>
-            <div>
+            <div style={{ display: "flex" }}>
               <img src={FoodLevelImg} alt="음식 난이도 이미지" />
+              <FontTimeLevel>{detailFood?.level}</FontTimeLevel>
             </div>
-            <FontTimeLevel>{detailFood?.level}</FontTimeLevel>
           </FoodTimeLevel>
         </FoodTimeLevelPadding>
         <FoodIngredientsStyle>
@@ -135,7 +141,7 @@ const FoodRecipeIndexContent = styled.div`
   overflow-y: scroll;
   position: absolute;
   top: 200px;
-  bottom: 0;
+  bottom: 220px;
 `;
 
 const FoodGram = styled.div`
@@ -164,7 +170,8 @@ const UlStyle = styled.ul`
 const FoodIngredientsStyle = styled.div`
   background: #ffefd1;
   height: 104px;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   margin-top: 31px;
   padding: 30px 0 30px 26px;
   overflow-x: scroll;
@@ -175,19 +182,19 @@ const FontTimeLevel = styled.div`
   font-weight: 600;
   font-size: 16px;
   color: #6fa9cd;
-  margin-left: 5px;
+  margin-left: 11px;
 `;
 
 const FoodTimeLevel = styled.div<{ stroke: boolean }>`
-  /* width: 160px; */
+  width: 160px;
   height: 54px;
   background: ${(props) => (props.stroke ? "#E4F1F8" : "#fff")};
   border: ${(props) => (props.stroke ? "none" : "1px solid #6FA9CD")};
   border-radius: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 13px 25px 15px 22px;
+  padding: 15px 25px 15px 22px;
 `;
 
 const FoodTimeLevelPadding = styled.div`
@@ -205,11 +212,11 @@ const FoodRecipe = styled.div`
   position: relative;
 `;
 
-const HeartStyle = styled.div`
+const HeartStyle = styled.div<{ isHeart: boolean }>`
   width: 30px;
   height: 30px;
   border-radius: 15px;
-  background: #ced4da;
+  background: ${(props) => (props.isHeart ? "#FC9596" : "#ced4da")};
   color: #fff;
   display: flex;
   justify-content: center;

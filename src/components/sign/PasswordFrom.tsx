@@ -1,15 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface PasswordType {
   text: string;
   getPassword: Function;
+  isFailBorderProps: boolean;
 }
 
-const PasswordFrom = ({ text, getPassword }: PasswordType) => {
-  const [userPasswrod, setUserPasswrod] = useState("");
-  const [passwordErrMsg, setPasswordErrMsg] = useState("");
-  const [isPassword, setIsPassword] = useState(true);
+const PasswordFrom = ({
+  text,
+  getPassword,
+  isFailBorderProps,
+}: PasswordType) => {
+  const [userPasswrod, setUserPasswrod] = useState<string>("");
+  const [passwordErrMsg, setPasswordErrMsg] = useState<string>("");
+  const [isPassword, setIsPassword] = useState<boolean>(true);
+  const [isPasswordlMsg, setIsPasswordMsg] = useState<boolean>(true);
+
+  useEffect(() => {
+    setIsPassword(isFailBorderProps);
+  }, [isFailBorderProps]);
 
   const onUserPassword = (e: React.FormEvent<HTMLInputElement>) => {
     const passwordReg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -21,9 +31,9 @@ const PasswordFrom = ({ text, getPassword }: PasswordType) => {
 
     if (value !== "" && !passwordReg.test(passwordCurrent)) {
       setPasswordErrMsg("영문/숫자 포함하여 8자리 이상 입력해주세요.");
-      setIsPassword(false);
+      setIsPasswordMsg(false);
     } else {
-      setIsPassword(true);
+      setIsPasswordMsg(true);
       getPassword(value);
     }
   };
@@ -38,7 +48,7 @@ const PasswordFrom = ({ text, getPassword }: PasswordType) => {
         passwordState={isPassword}
         placeholder="영문/숫자 조합으로 8자 이상을 사용하세요."
       />
-      {isPassword ? null : (
+      {isPasswordlMsg ? null : (
         <PasswordErrorMsg>{passwordErrMsg}</PasswordErrorMsg>
       )}
     </>

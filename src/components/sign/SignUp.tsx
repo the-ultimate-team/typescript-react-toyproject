@@ -15,6 +15,7 @@ const SignUp = () => {
     name: "",
     id: "",
     password: "",
+    isLogin: false,
   });
   // button 활성화 상태값
   const [isCheckSignUp, setIsCheckSignUp] = useState(true);
@@ -37,15 +38,12 @@ const SignUp = () => {
 
   // Form에 있는 값 끌어올리기
   const getUserName = (value: string) => {
-    console.log(value);
     setSignUpUserInfo({ ...signUpUserInfo, name: value });
   };
   const getId = (value: string) => {
-    console.log(value);
     setSignUpUserInfo({ ...signUpUserInfo, id: value });
   };
   const getPassword = (value: string) => {
-    console.log(value);
     setSignUpUserInfo({ ...signUpUserInfo, password: value });
   };
 
@@ -62,7 +60,7 @@ const SignUp = () => {
         <NameForm getUserName={getUserName} />
       </div>
       <div style={{ marginTop: "14px" }}>
-        <IdForm getId={getId} />
+        <IdForm isFailBorderProps={true} getId={getId} />
       </div>
       <div style={{ marginTop: "14px" }}>
         <PasswordConfirmForm getPassword={getPassword} />
