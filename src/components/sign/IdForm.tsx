@@ -28,8 +28,10 @@ const IdForm = ({ getId, isFailBorderProps }: IdValue) => {
     if (value !== "" && !emailRegex.test(emailCurrent)) {
       setEmailErrMsg("이메일 형식이 틀렸습니다. 다시 입력해주세요.");
       setIsEmailMsg(false);
+      setIsEmail(false);
     } else if (emailRegex.test(emailCurrent)) {
       setIsEmailMsg(true);
+      setIsEmail(true);
       getId(value);
     }
   };

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import DibsModal from "./DibsModal";
 import { useRecoilState } from "recoil";
 import { DibsState, User } from "../states";
+import LoginAlertModal from "./LoginAlertModal";
 
 type Food = {
   id: number;
@@ -28,6 +29,8 @@ const RecommendPage = () => {
   const [isDibsModal, setIsDibsModal] = useState<boolean>(false);
   const [dibsList, setDibsList] = useRecoilState(DibsState);
   const [dibsMessage, setDibsMessage] = useState<string>("");
+  const [isLoginAlertModal, setIsLoginAlertModal] = useState<boolean>(false);
+  const [isLoginAlertMessage, setIsLoginAlertMessage] = useState<string>("");
 
   useEffect(() => {
     setRecommendFood(getRecommendFood(getRandomId()));
@@ -62,13 +65,24 @@ const RecommendPage = () => {
   };
 
   const notDibs = () => {
-    alert("로그인 이용 후, 사용하실 바랍니다.");
+    setIsLoginAlertMessage("로그인 후, 이용하실 수 있습니다.");
+    setIsLoginAlertModal(true);
+  };
+
+  const loginAlertModalClose = () => {
+    setIsLoginAlertModal(false);
   };
 
   return (
     <>
       {isDibsModal ? (
         <DibsModal onClose={DibsModalHandler} message={dibsMessage} />
+      ) : null}
+      {isLoginAlertModal ? (
+        <LoginAlertModal
+          loginAlertModalCloseUp={loginAlertModalClose}
+          message={isLoginAlertMessage}
+        />
       ) : null}
       <RecommendTagStyle>
         <RecommendTitleFontStyle>
